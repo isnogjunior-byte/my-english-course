@@ -162,11 +162,6 @@ class EnglishTeacherApp {
                 content.classList.add('active');
             }
         });
-        
-        if (tabName === 'chat' && !this.chatStarted) {
-            this.chatStarted = true;
-            this.loadScenario(parseInt(this.scenarioSelect.value) || 1);
-        }
     }
     
     loadLessonContent() {
@@ -768,7 +763,7 @@ class EnglishTeacherApp {
     
     // Chat methods
     initChat() {
-        // Chat will auto-load when user switches to the Chat tab
+        this.showWelcome();
     }
     
     showWelcome() {
@@ -779,15 +774,44 @@ class EnglishTeacherApp {
         this.chatTotal = 0;
         this.updateChatScore();
         
+        const startBtnHtml = `
+            <div style="text-align:center; margin:20px 0;">
+                <button id="btnStartChat" style="
+                    background: linear-gradient(135deg, #4299e1, #3182ce);
+                    color: white;
+                    border: none;
+                    padding: 16px 32px;
+                    border-radius: 12px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+                    width: 100%;
+                    max-width: 400px;
+                ">🎤 INICIAR CONVERSA</button>
+                <p style="color:#718096; font-size:13px; margin-top:8px;">Fale ou digite suas respostas</p>
+            </div>
+        `;
+        
         this.addChatMessage('teacher', 
-            `Olá! Eu sou a Professora Sarah! 👩‍🏫\n\nVou te fazer perguntas em inglês e você responde. Pode digitar em português ou inglês!\n\n👇 Clique no botão abaixo para começar.`,
-            `Hello! I'm Teacher Sarah! I'll ask you questions in English and you answer. You can type in Portuguese or English!`
+            `Olá! Eu sou a Professora Sarah! 👩‍🏫<br><br>
+            Vou te fazer perguntas em inglês e você responde.<br><br>
+            <strong>Você pode:</strong><br>
+            🎤 Falar no microfone<br>
+            ⌨️ Digitar a resposta<br>
+            📋 Clicar numa das opções abaixo<br><br>
+            👇 Clique no botão para começar!${startBtnHtml}`,
+            ''
         );
         
-        this.chatHint.innerHTML = `
-            <p>🎤 <strong>Para começar, clique em "Falar" e digite qualquer coisa, ou selecione um cenário acima!</strong></p>
-            <p style="color:#718096; font-size:12px;">Ou selecione um cenário diferente no menu acima</p>
-        `;
+        setTimeout(() => {
+            const btn = document.getElementById('btnStartChat');
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    this.loadScenario(parseInt(this.scenarioSelect.value) || 1);
+                });
+            }
+        }, 100);
     }
     
     loadScenario(scenarioId) {
@@ -947,7 +971,7 @@ class EnglishTeacherApp {
         messageDiv.innerHTML = `
             <div class="chat-avatar">${avatar}</div>
             <div class="chat-bubble">
-                <p>${text}</p>
+                <div>${text}</div>
                 ${translationHtml}
             </div>
         `;
@@ -969,8 +993,8 @@ class EnglishTeacherApp {
     }
     
     resetChat() {
-        this.chatStarted = true;
-        this.loadScenario(parseInt(this.scenarioSelect.value) || 1);
+        this.chatStarted = false;
+        this.showWelcome();
     }
     
     finishChat() {
@@ -978,20 +1002,34 @@ class EnglishTeacherApp {
         
         let message = '';
         if (percentage >= 80) {
-            message = `Parabéns! Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Excelente trabalho!`;
+            message = `🎉 Parabéns! Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Excelente trabalho!`;
         } else if (percentage >= 50) {
-            message = `Bom trabalho! Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Continue praticando!`;
+            message = `👍 Bom trabalho! Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Continue praticando!`;
         } else {
-            message = `Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Não desista! Tente novamente!`;
+            message = `💪 Você acertou ${this.chatCorrect} de ${this.chatTotal} perguntas (${percentage}%). Não desista! Tente novamente!`;
         }
         
-        this.addChatMessage('teacher', message, `Resultado: ${message}`);
-        this.speech.speak(message);
+        const restartBtnHtml = `
+            <div style="text-align:center; margin:16px 0;">
+                <button onclick="window.app.resetChat()" style="
+                    background: linear-gradient(135deg, #48bb78, #38a169);
+                    color: white;
+                    border: none;
+                    padding: 14px 28px;
+                    border-radius: 12px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+                ">🔄 INICIAR NOVA CONVERSA</button>
+            </div>
+        `;
+        
+        this.addChatMessage('teacher', message + restartBtnHtml, '');
+        this.speech.speak(message.replace(/[🎉👍💪]/g, '').trim());
         
         this.chatTeacherStatus.textContent = 'Conversa finalizada';
-        this.chatHint.innerHTML = `
-            <p>🎉 <strong>Conversa finalizada!</strong> Clique em "Recomeçar" para praticar novamente.</p>
-        `;
+        this.isWaitingForAnswer = false;
     }
 }
 
