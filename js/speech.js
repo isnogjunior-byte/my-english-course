@@ -271,9 +271,10 @@ class SpeechManager {
         });
         
         let accuracy = Math.round((matches / totalWords) * 100);
-        if (spokenWords.length > 0) {
-            const coverage = Math.min(spokenWords.length / totalWords, 1.5);
-            accuracy = Math.round(accuracy * Math.min(coverage, 1.2));
+        
+        // Bonus for matching at least one word (encourages beginners)
+        if (matches >= 1 && accuracy < 50) {
+            accuracy = Math.max(accuracy, 30);
         }
         
         return Math.min(accuracy, 100);

@@ -15,6 +15,7 @@ class EnglishTeacherApp {
         this.isChatActive = false;
         this.isWaitingForAnswer = false;
         this.isChatTabActive = false;
+        this.chatStarted = false;
         
         this.initElements();
         this.initEventListeners();
@@ -128,6 +129,7 @@ class EnglishTeacherApp {
         });
         
         this.scenarioSelect.addEventListener('change', (e) => {
+            this.chatStarted = true;
             this.loadScenario(parseInt(e.target.value));
         });
     }
@@ -160,6 +162,11 @@ class EnglishTeacherApp {
                 content.classList.add('active');
             }
         });
+        
+        if (tabName === 'chat' && !this.chatStarted) {
+            this.chatStarted = true;
+            this.loadScenario(parseInt(this.scenarioSelect.value) || 1);
+        }
     }
     
     loadLessonContent() {
@@ -633,31 +640,35 @@ class EnglishTeacherApp {
         
         this.showMessage('Você', transcript);
         
-        if (accuracy >= 40) {
+        if (accuracy >= 25) {
             this.totalCorrect++;
             this.teacherStatus.textContent = 'Muito bem!';
-            this.showMessage('Professor', `Excelente! Você disse: "${transcript}" (${accuracy}%)`);
+            this.showMessage('Professor', `✅ Excelente! Você disse: "${transcript}" (${accuracy}%)`);
             
             setTimeout(() => {
-                this.speech.speak('Great job!', () => {
+                const phrases = ['Great job!', 'Wonderful!', 'Perfect!', 'Amazing!', 'Excellent work!', 'Well done!', 'Awesome!'];
+                const random = phrases[Math.floor(Math.random() * phrases.length)];
+                this.speech.speak(random, () => {
                     this.teacherStatus.textContent = 'Clique em "Próxima" para continuar';
                 });
             }, 1000);
-        } else if (accuracy >= 15) {
+        } else if (accuracy >= 10) {
             this.teacherStatus.textContent = 'Quase lá!';
-            this.showMessage('Professor', `Bom esforço! Ouvi: "${transcript}" (${accuracy}%). Continue praticando!`);
+            this.showMessage('Professor', `👍 Bom esforço! Ouvi: "${transcript}" (${accuracy}%). Está quase lá!`);
             
             setTimeout(() => {
-                this.speech.speak('Good try! Keep practicing!', () => {
+                const phrases = ['Good try!', 'Almost there!', 'Keep going!', 'Nice effort!', 'You are learning!'];
+                const random = phrases[Math.floor(Math.random() * phrases.length)];
+                this.speech.speak(random, () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" ou "Próxima"';
                 });
             }, 1000);
         } else {
-            this.teacherStatus.textContent = 'Tente novamente';
-            this.showMessage('Professor', `Não ouvi direito. Ouça a frase e repita.`);
+            this.teacherStatus.textContent = 'Sem problemas!';
+            this.showMessage('Professor', `💪 Sem problemas! Ouça a frase de novo e tente uma palavra que ouviu.`);
             
             setTimeout(() => {
-                this.speech.speak("Listen and try again.", () => {
+                this.speech.speak("That's okay! Try again!", () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" para ouvir novamente';
                 });
             }, 1000);
@@ -757,7 +768,7 @@ class EnglishTeacherApp {
     
     // Chat methods
     initChat() {
-        this.showWelcome();
+        // Chat will auto-load when user switches to the Chat tab
     }
     
     showWelcome() {
@@ -790,14 +801,12 @@ class EnglishTeacherApp {
         const scenario = getScenario(scenarioId);
         if (!scenario) return;
         
-        if (scenario.context) {
-            this.addChatMessage('teacher', 
-                `${scenario.context}\n\n🇧🇷 ${scenario.contextTranslation || ''}`, 
-                ''
-            );
-        }
+        this.addChatMessage('teacher', 
+            `👩‍🏫 Professora Sarah\n\nOlá! Vamos praticar: <strong>${scenario.title}</strong>\n\n${scenario.context ? '🇧🇷 ' + scenario.context : ''}\n${scenario.contextTranslation ? '🇺🇸 ' + scenario.contextTranslation : ''}\n\nEu vou te fazer perguntas em inglês. Você pode responder em inglês ou português!`,
+            ''
+        );
         
-        this.askNextQuestion();
+        setTimeout(() => this.askNextQuestion(), 1500);
     }
     
     askNextQuestion() {
@@ -819,16 +828,21 @@ class EnglishTeacherApp {
         this.isWaitingForAnswer = true;
         this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
         
-        let questionHtml = `<div style="font-size:18px; font-weight:bold; margin-bottom:8px;">💬 ${question.question}</div>`;
-        questionHtml += `<div style="font-size:15px; color:#4a5568;">🇧🇷 ${question.translation}</div>`;
+        let questionHtml = `<div style="background: linear-gradient(135deg, #ebf8ff, #bee3f8); border: 2px solid #4299e1; border-radius: 12px; padding: 16px; margin: 8px 0;">`;
+        questionHtml += `<div style="font-size:20px; font-weight:bold; color:#2b6cb0; margin-bottom:8px;">💬 Pergunta ${this.currentQuestionIndex + 1}:</div>`;
+        questionHtml += `<div style="font-size:18px; font-weight:bold; margin-bottom:4px;">${question.question}</div>`;
+        questionHtml += `<div style="font-size:14px; color:#4a5568;">🇧🇷 ${question.translation}</div>`;
+        questionHtml += `</div>`;
         
         this.addChatMessage('teacher', questionHtml, '');
         
-        try {
-            this.speech.speak(question.question);
-        } catch(e) {
-            console.log('Speech error:', e);
-        }
+        setTimeout(() => {
+            try {
+                this.speech.speak(question.question);
+            } catch(e) {
+                console.log('Speech error:', e);
+            }
+        }, 500);
         
         let tipsHtml = '';
         
@@ -870,12 +884,14 @@ class EnglishTeacherApp {
             );
             this.speech.speak(encouragement.text);
         } else {
-            const correctAnswer = question.exampleAnswers ? question.exampleAnswers[0] : question.expectedAnswers[0];
+            const correctAnswer = question.exampleAnswers ? question.exampleAnswers[0] : 'Try again!';
+            const failMsg = question.followUp ? question.followUp.fail : ["Tente: " + correctAnswer];
+            const msg = Array.isArray(failMsg) ? failMsg[0] : failMsg;
             this.addChatMessage('teacher', 
-                `❌ Não entendi.\n\n📝 Resposta correta: "${correctAnswer}"\n\n🇧🇷 Tente na próxima pergunta!`, 
+                `📝 ${msg}\n\n🇺🇸 Resposta sugerida: "${correctAnswer}"\n\n💪 Não desista! Tente a próxima!`, 
                 ''
             );
-            this.speech.speak("Let's try the next question!");
+            this.speech.speak("That's okay! Try the next one!");
         }
         
         this.updateChatScore();
@@ -883,7 +899,7 @@ class EnglishTeacherApp {
         setTimeout(() => {
             this.currentQuestionIndex++;
             this.askNextQuestion();
-        }, 3000);
+        }, 3500);
     }
     
     sendChatMessage() {
@@ -953,7 +969,8 @@ class EnglishTeacherApp {
     }
     
     resetChat() {
-        this.loadScenario(this.currentScenario);
+        this.chatStarted = true;
+        this.loadScenario(parseInt(this.scenarioSelect.value) || 1);
     }
     
     finishChat() {
