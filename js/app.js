@@ -128,8 +128,7 @@ class EnglishTeacherApp {
         });
         
         this.scenarioSelect.addEventListener('change', (e) => {
-            this.currentScenario = parseInt(e.target.value);
-            this.resetChat();
+            this.loadScenario(parseInt(e.target.value));
         });
     }
     
@@ -634,22 +633,22 @@ class EnglishTeacherApp {
         
         this.showMessage('Você', transcript);
         
-        if (accuracy >= 60) {
+        if (accuracy >= 40) {
             this.totalCorrect++;
             this.teacherStatus.textContent = 'Muito bem!';
             this.showMessage('Professor', `Excelente! Você disse: "${transcript}" (${accuracy}%)`);
             
             setTimeout(() => {
-                this.speech.speak('Great job! Your pronunciation is good!', () => {
+                this.speech.speak('Great job!', () => {
                     this.teacherStatus.textContent = 'Clique em "Próxima" para continuar';
                 });
             }, 1000);
-        } else if (accuracy >= 30) {
+        } else if (accuracy >= 15) {
             this.teacherStatus.textContent = 'Quase lá!';
-            this.showMessage('Professor', `Bom esforço! Ouvi: "${transcript}". Tente falar mais devagar.`);
+            this.showMessage('Professor', `Bom esforço! Ouvi: "${transcript}" (${accuracy}%). Continue praticando!`);
             
             setTimeout(() => {
-                this.speech.speak('Good try! Speak more slowly, please.', () => {
+                this.speech.speak('Good try! Keep practicing!', () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" ou "Próxima"';
                 });
             }, 1000);
@@ -758,18 +757,38 @@ class EnglishTeacherApp {
     
     // Chat methods
     initChat() {
-        this.loadScenario(1);
+        this.showWelcome();
     }
     
-    loadScenario(scenarioId) {
-        const scenario = getScenario(scenarioId);
-        if (!scenario) return;
-        
-        this.clearChat();
+    showWelcome() {
+        this.chatMessages.innerHTML = '';
+        this.isWaitingForAnswer = false;
         this.currentQuestionIndex = 0;
         this.chatCorrect = 0;
         this.chatTotal = 0;
         this.updateChatScore();
+        
+        this.addChatMessage('teacher', 
+            `Olá! Eu sou a Professora Sarah! 👩‍🏫\n\nVou te fazer perguntas em inglês e você responde. Pode digitar em português ou inglês!\n\n👇 Clique no botão abaixo para começar.`,
+            `Hello! I'm Teacher Sarah! I'll ask you questions in English and you answer. You can type in Portuguese or English!`
+        );
+        
+        this.chatHint.innerHTML = `
+            <p>🎤 <strong>Para começar, clique em "Falar" e digite qualquer coisa, ou selecione um cenário acima!</strong></p>
+            <p style="color:#718096; font-size:12px;">Ou selecione um cenário diferente no menu acima</p>
+        `;
+    }
+    
+    loadScenario(scenarioId) {
+        this.currentScenario = scenarioId;
+        this.currentQuestionIndex = 0;
+        this.chatCorrect = 0;
+        this.chatTotal = 0;
+        this.chatMessages.innerHTML = '';
+        this.updateChatScore();
+        
+        const scenario = getScenario(scenarioId);
+        if (!scenario) return;
         
         if (scenario.context) {
             this.addChatMessage('teacher', 
@@ -778,13 +797,10 @@ class EnglishTeacherApp {
             );
         }
         
-        setTimeout(() => {
-            this.askNextQuestion();
-        }, 1500);
+        this.askNextQuestion();
     }
     
     askNextQuestion() {
-        const scenario = getScenario(this.currentScenario);
         const question = getQuestion(this.currentScenario, this.currentQuestionIndex);
         
         if (!question) {
@@ -792,10 +808,7 @@ class EnglishTeacherApp {
             return;
         }
         
-        this.isWaitingForAnswer = true;
-        this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
-        
-        if (this.currentQuestionIndex > 0 && Math.random() > 0.7) {
+        if (this.currentQuestionIndex > 0) {
             const thinking = getRandomThinking();
             this.addChatMessage('teacher', 
                 `${thinking.text}\n\n🇧🇷 ${thinking.translation}`, 
@@ -803,28 +816,36 @@ class EnglishTeacherApp {
             );
         }
         
-        let questionMessage = `💬 ${question.question}\n\n🇧🇷 ${question.translation}`;
+        this.isWaitingForAnswer = true;
+        this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
         
-        this.addChatMessage('teacher', questionMessage, '');
+        let questionHtml = `<div style="font-size:18px; font-weight:bold; margin-bottom:8px;">💬 ${question.question}</div>`;
+        questionHtml += `<div style="font-size:15px; color:#4a5568;">🇧🇷 ${question.translation}</div>`;
         
-        this.speech.speak(question.question);
+        this.addChatMessage('teacher', questionHtml, '');
+        
+        try {
+            this.speech.speak(question.question);
+        } catch(e) {
+            console.log('Speech error:', e);
+        }
         
         let tipsHtml = '';
         
         if (question.exampleAnswers && question.exampleAnswers.length > 0) {
             tipsHtml += `<p>📝 <strong>DIGITE UMA DESSAS OPÇÕES:</strong></p>`;
-            tipsHtml += `<div style="background:#ebf8ff; border-radius:8px; padding:10px; margin:8px 0;">`;
+            tipsHtml += `<div style="background:#ebf8ff; border-radius:8px; padding:12px; margin:8px 0; border:2px solid #bee3f8;">`;
             question.exampleAnswers.forEach(ex => {
-                tipsHtml += `<div style="padding:4px 0; border-bottom:1px solid #bee3f8;"><em>"${ex}"</em></div>`;
+                tipsHtml += `<div style="padding:6px 8px; margin:4px 0; background:white; border-radius:6px; cursor:pointer;" onclick="document.getElementById('chatInput').value='${ex.replace(/'/g, "\\'")}'; document.getElementById('btnChatSend').click();"><em>"${ex}"</em></div>`;
             });
             tipsHtml += `</div>`;
         }
         
-        tipsHtml += `<p>💡 <strong>Ou digite qualquer coisa:</strong></p><ul>`;
+        tipsHtml += `<p style="margin-top:12px;"><strong>💡 Ou digite sua própria resposta:</strong></p>`;
+        tipsHtml += `<ul style="margin:4px 0;">`;
         tipsHtml += `<li>Uma palavra em inglês (ex: <em>yes</em>, <em>no</em>)</li>`;
-        tipsHtml += `<li>Uma frase em português (ex: <em>meu nome é Maria</em>)</li>`;
+        tipsHtml += `<li>Uma frase em português</li>`;
         tipsHtml += `</ul>`;
-        tipsHtml += `<p style="color:#718096; font-size:12px;">🎤 Microfone: clique em "Falar" e fale em inglês</p>`;
         
         this.chatHint.innerHTML = tipsHtml;
     }
@@ -858,8 +879,6 @@ class EnglishTeacherApp {
         }
         
         this.updateChatScore();
-        
-        this.chatHint.innerHTML = `<p>⏳ Aguarde a próxima pergunta...</p>`;
         
         setTimeout(() => {
             this.currentQuestionIndex++;
@@ -924,17 +943,6 @@ class EnglishTeacherApp {
     clearChat() {
         this.chatMessages.innerHTML = '';
         this.isWaitingForAnswer = false;
-        
-        // Apresentação da Professora Sarah (sem pergunta!)
-        this.addChatMessage('teacher', 
-            `Olá! Eu sou a Professora Sarah! 👩‍🏫\n\nVou ser sua professora de inglês. Vamos praticar juntos!\n\nVou te fazer perguntas em inglês e você responde. Pode digitar em português ou inglês. Não se preocupe, eu te ajudo!`,
-            `Hello! I'm Teacher Sarah! I'll be your English teacher. Let's practice together!\n\nI'll ask you questions in English and you answer. You can type in Portuguese or English. Don't worry, I'll help you!`
-        );
-        
-        // Falar a introdução
-        setTimeout(() => {
-            this.speech.speak("Hello! I am Teacher Sarah. I will be your English teacher. Let's practice together!");
-        }, 1000);
     }
     
     updateChatScore() {
@@ -945,11 +953,6 @@ class EnglishTeacherApp {
     }
     
     resetChat() {
-        this.currentQuestionIndex = 0;
-        this.chatCorrect = 0;
-        this.chatTotal = 0;
-        this.isWaitingForAnswer = false;
-        this.updateChatScore();
         this.loadScenario(this.currentScenario);
     }
     
