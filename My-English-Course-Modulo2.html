@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My English Course - Modulo 1</title>
-    <style>* {
+    <title>My English Course - Modulo 2</title>
+    <style>
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -66,7 +67,7 @@ body {
 
 .course-subtitle {
     font-size: 1.3rem;
-    color: #4a5568;
+    color: rgba(255,255,255,0.8);
     margin-bottom: 20px;
 }
 
@@ -80,7 +81,7 @@ body {
 
 .course-description {
     font-size: 1.1rem;
-    color: #4a5568;
+    color: rgba(255,255,255,0.7);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -142,48 +143,17 @@ body {
     justify-content: center;
     gap: 15px;
     font-size: 0.8rem;
-    color: #718096;
+    color: rgba(255,255,255,0.5);
 }
 
 .home-footer {
-    color: #718096;
+    color: rgba(255,255,255,0.4);
     font-size: 0.85rem;
     line-height: 1.8;
 }
 
 .home-footer strong {
-    color: #4a5568;
-}
-
-/* Seletor de Modulo */
-.module-selector {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.module-btn {
-    padding: 10px 24px;
-    border: 2px solid #667eea;
-    background: white;
-    color: #667eea;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.module-btn:hover {
-    background: #667eea;
-    color: white;
-}
-
-.module-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-color: transparent;
+    color: rgba(255,255,255,0.7);
 }
 
 /* ============================================
@@ -1567,9 +1537,11 @@ body {
         width: 100%;
         justify-content: center;
     }
-}    </style>
+}
+    </style>
 </head>
 <body>
+
 
     <!-- TELA INICIAL - CAPA -->
     <div id="homeScreen" class="home-screen">
@@ -2038,8 +2010,7 @@ body {
     <script src="js/conversations.js"></script>
     <script src="js/speech.js"></script>
     <script src="js/app.js"></script>
-</body>
-</html>
+
 
     <script>
 const lessons = {
@@ -3043,6 +3014,916 @@ const lessons = {
                 tips: ["'Croissant' = croissant", "'Anything else' = mais alguma coisa"]
             }
         ]
+    },
+
+    // ============================================
+    // MODULO 2 - PRESENT SIMPLE, PRESENT CONTINUOUS, VERBOS
+    // ============================================
+
+    8: {
+        title: "Present Simple - Parte 1",
+        description: "Aprenda a usar o presente simples com I, You, We, They",
+        level: "Intermediario",
+        duration: "25 min",
+
+        vocabulary: [
+            { word: "Work", translation: "Trabalhar", pronunciation: "UERK", example: "I work at a bank." },
+            { word: "Live", translation: "Morar", pronunciation: "LIV", example: "I live in Brazil." },
+            { word: "Like", translation: "Gostar", pronunciation: "LAIK", example: "I like coffee." },
+            { word: "Love", translation: "Amar", pronunciation: "LAV", example: "I love my family." },
+            { word: "Hate", translation: "Odiar", pronunciation: "HEIT", example: "I hate spiders." },
+            { word: "Want", translation: "Querer", pronunciation: "UONT", example: "I want water." },
+            { word: "Need", translation: "Precisar", pronunciation: "NIID", example: "I need help." },
+            { word: "Eat", translation: "Comer", pronunciation: "IIT", example: "I eat breakfast at 7 AM." },
+            { word: "Drink", translation: "Beber", pronunciation: "DRINK", example: "I drink water every day." },
+            { word: "Sleep", translation: "Dormir", pronunciation: "SLIIP", example: "I sleep 8 hours." },
+            { word: "Study", translation: "Estudar", pronunciation: "STADI", example: "I study English." },
+            { word: "Play", translation: "Jogar/Brincar", pronunciation: "PLEI", example: "I play soccer." },
+            { word: "Read", translation: "Ler", pronunciation: "RIID", example: "I read books." },
+            { word: "Write", translation: "Escrever", pronunciation: "RAIT", example: "I write emails." },
+            { word: "Listen", translation: "Ouvir/Escutar", pronunciation: "LISSEN", example: "I listen to music." },
+            { word: "Watch", translation: "Assistir/Ver", pronunciation: "UOTCH", example: "I watch TV." },
+            { word: "Go", translation: "Ir", pronunciation: "GOU", example: "I go to work." },
+            { word: "Come", translation: "Vir", pronunciation: "KAM", example: "I come home at 6 PM." },
+            { word: "Have", translation: "Ter", pronunciation: "HAV", example: "I have two children." },
+            { word: "Do", translation: "Fazer", pronunciation: "DUU", example: "I do my homework." },
+            { word: "Speak", translation: "Falar", pronunciation: "SPIIK", example: "I speak English." },
+            { word: "Understand", translation: "Entender", pronunciation: "UNDER-stand", example: "I understand you." },
+            { word: "Think", translation: "Pensar", pronunciation: "SINK", example: "I think so." },
+            { word: "Know", translation: "Saber", pronunciation: "NOU", example: "I know the answer." },
+            { word: "Believe", translation: "Acreditar", pronunciation: "bi-LIIV", example: "I believe in you." },
+            { word: "Try", translation: "Tentar", pronunciation: "TRAI", example: "I try my best." },
+            { word: "Help", translation: "Ajudar", pronunciation: "HELP", example: "I help my friends." },
+            { word: "Learn", translation: "Aprender", pronunciation: "LERN", example: "I learn new words." },
+            { word: "Teach", translation: "Ensinar", pronunciation: "TIICH", example: "I teach English." },
+            { word: "Talk", translation: "Conversar", pronunciation: "TOK", example: "I talk to my mom." }
+        ],
+
+        grammar: {
+            title: "Present Simple com I, You, We, They",
+            explanation: "O Present Simple usa o verbo no formato base para I, You, We, They. Serve para falar de habitos, verdades gerais e rotinas.",
+            rules: [
+                {
+                    rule: "I/You/We/They + VERBO BASE",
+                    example: "I work at a bank. (Eu trabalho em um banco)",
+                    note: "Nao muda nada no verbo"
+                },
+                {
+                    rule: "I am / You are / We are / They are",
+                    example: "I am happy. (Eu estou feliz)",
+                    note: "Usar 'am' so com I, 'are' com You/We/They"
+                },
+                {
+                    rule: "I/You/We/They + DON'T + VERBO",
+                    example: "I don't speak French. (Eu nao falo frances)",
+                    note: "Negativo usa don't"
+                },
+                {
+                    rule: "DO + I/You/we/they + VERBO?",
+                    example: "Do you speak English? (Voce fala ingles?)",
+                    note: "Pergunta usa Do no comeco"
+                }
+            ],
+            sentences: [
+                { english: "I live in Brazil.", portuguese: "Eu moro no Brasil.", structure: "I + live + in + Brazil" },
+                { english: "You speak English.", portuguese: "Voce fala ingles.", structure: "You + speak + English" },
+                { english: "We work together.", portuguese: "Nos trabalhamos juntos.", structure: "We + work + together" },
+                { english: "They like pizza.", portuguese: "Eles gostam de pizza.", structure: "They + like + pizza" },
+                { english: "I don't eat meat.", portuguese: "Eu nao como carne.", structure: "I + don't + eat + meat" },
+                { english: "Do you study English?", portuguese: "Voce estuda ingles?", structure: "Do + you + study + English?" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Apresentacao Pessoal",
+                context: "Voce esta conhecendo uma nova pessoa em uma festa.",
+                lines: [
+                    { speaker: "A", english: "Hi! What's your name?", portuguese: "Oii! Qual e o seu nome?" },
+                    { speaker: "B", english: "My name is Maria. What's your name?", portuguese: "Meu nome e Maria. Qual e o seu nome?" },
+                    { speaker: "A", english: "I'm John. Nice to meet you!", portuguese: "Eu sou John. Prazer em te conhecer!" },
+                    { speaker: "B", english: "Nice to meet you too! Where do you live?", portuguese: "Prazer tambem! Onde voce mora?" },
+                    { speaker: "A", english: "I live in Sao Paulo. And you?", portuguese: "Eu moro em Sao Paulo. E voce?" },
+                    { speaker: "B", english: "I live in Rio de Janeiro.", portuguese: "Eu moro no Rio de Janeiro." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "I live in Brazil.",
+                translation: "Eu moro no Brasil.",
+                response: "Oh, Brazil! I love Brazilian music!",
+                responseTranslation: "Oh, Brasil! Eu amo musica brasileira!",
+                tips: ["'Live' = morar", "'In' = em"]
+            },
+            {
+                expected: "I work at a bank.",
+                translation: "Eu trabalho em um banco.",
+                response: "That's interesting! What do you do there?",
+                responseTranslation: "Isso e interessante! O que voce faz la?",
+                tips: ["'Work' = trabalhar", "'At' = em (lugar)"]
+            },
+            {
+                expected: "I like coffee.",
+                translation: "Eu gosto de cafe.",
+                response: "Me too! Coffee is great in the morning.",
+                responseTranslation: "Eu tambem! Cafe e otimo de manha.",
+                tips: ["'Like' = gostar", "'Coffee' = cafe"]
+            },
+            {
+                expected: "I don't eat meat.",
+                translation: "Eu nao como carne.",
+                response: "That's OK. There are many vegetarian options.",
+                responseTranslation: "Tudo bem. Tem muitas opcoes vegetarianas.",
+                tips: ["'Don't' = nao (com I/you/we/they)", "'Meat' = carne"]
+            },
+            {
+                expected: "I study English every day.",
+                translation: "Eu estudo ingles todo dia.",
+                response: "That's great! Practice makes perfect!",
+                responseTranslation: "Otimo! Pratica leva a perfeicao!",
+                tips: ["'Study' = estudar", "'Every day' = todo dia"]
+            }
+        ]
+    },
+
+    9: {
+        title: "Present Simple - Parte 2",
+        description: "Aprenda a usar o presente simples com He, She, It",
+        level: "Intermediario",
+        duration: "25 min",
+
+        vocabulary: [
+            { word: "Works", translation: "Trabalha", pronunciation: "UERKS", example: "She works at a hospital." },
+            { word: "Lives", translation: "Mora", pronunciation: "LIVS", example: "He lives in New York." },
+            { word: "Likes", translation: "Gosta", pronunciation: "LAIKS", example: "She likes chocolate." },
+            { word: "Loves", translation: "Ama", pronunciation: "LAVS", example: "He loves his family." },
+            { word: "Hates", translation: "Odia", pronunciation: "HEITS", example: "She hates spiders." },
+            { word: "Wants", translation: "Quer", pronunciation: "UONTS", example: "He wants coffee." },
+            { word: "Needs", translation: "Precisa", pronunciation: "NIIDS", example: "She needs help." },
+            { word: "Eats", translation: "Come", pronunciation: "IITS", example: "He eats breakfast at 8 AM." },
+            { word: "Drinks", translation: "Bebe", pronunciation: "DRINKS", example: "She drinks tea." },
+            { word: "Sleeps", translation: "Dorme", pronunciation: "SLIIPS", example: "The baby sleeps a lot." },
+            { word: "Studies", translation: "Estuda", pronunciation: "STADIZ", example: "He studies math." },
+            { word: "Plays", translation: "Joga", pronunciation: "PLEIS", example: "She plays piano." },
+            { word: "Reads", translation: "Le", pronunciation: "RIIDS", example: "He reads books." },
+            { word: "Writes", translation: "Escreve", pronunciation: "RAITS", example: "She writes stories." },
+            { word: "Listens", translation: "Ouve", pronunciation: "LISSENS", example: "He listens to music." },
+            { word: "Watches", translation: "Assiste", pronunciation: "UOTCHIZ", example: "She watches TV." },
+            { word: "Goes", translation: "Vai", pronunciation: "GOUZ", example: "He goes to work." },
+            { word: "Comes", translation: "Vem", pronunciation: "KAMS", example: "She comes home at 5 PM." },
+            { word: "Has", translation: "Tem", pronunciation: "HAS", example: "He has two sisters." },
+            { word: "Does", translation: "Faz", pronunciation: "DAZ", example: "She does her homework." },
+            { word: "Speaks", translation: "Fala", pronunciation: "SPIIKS", example: "He speaks English." },
+            { word: "Understands", translation: "Entende", pronunciation: "UNDER-STANDS", example: "She understands Portuguese." },
+            { word: "Thinks", translation: "Pensa", pronunciation: "SINKS", example: "He thinks it's good." },
+            { word: "Knows", translation: "Sabe", pronunciation: "NOUZ", example: "She knows the answer." },
+            { word: "Begins", translation: "Comeca", pronunciation: "bi-GINS", example: "The class begins at 9 AM." }
+        ],
+
+        grammar: {
+            title: "Present Simple com He, She, It",
+            explanation: "Quando o sujeito e He, She ou It, precisamos adicionar -s ou -es no final do verbo. Isso e a regra do Present Simple para terceira pessoa.",
+            rules: [
+                {
+                    rule: "He/She/It + VERBO + S/ES",
+                    example: "She works at a hospital. (Ela trabalha em um hospital)",
+                    note: "Adicionar -s no final do verbo"
+                },
+                {
+                    rule: "He is / She is / It is",
+                    example: "He is a teacher. (Ele e professor)",
+                    note: "Usar 'is' com He/She/It"
+                },
+                {
+                    rule: "He/She/It + DOESN'T + VERBO",
+                    example: "She doesn't speak French. (Ela nao fala frances)",
+                    note: "Negativo usa doesn't + verbo SEM -s"
+                },
+                {
+                    rule: "DOES + he/she/it + VERBO?",
+                    example: "Does he speak English? (Ele fala ingles?)",
+                    note: "Pergunta usa Does + verbo SEM -s"
+                }
+            ],
+            sentences: [
+                { english: "She works at a hospital.", portuguese: "Ela trabalha em um hospital.", structure: "She + works + at + hospital" },
+                { english: "He lives in New York.", portuguese: "Ele mora em Nova York.", structure: "He + lives + in + New York" },
+                { english: "It rains a lot.", portuguese: "Chove muito.", structure: "It + rains + a lot" },
+                { english: "She doesn't like spiders.", portuguese: "Ela nao gosta de aranhas.", structure: "She + doesn't + like + spiders" },
+                { english: "Does he work here?", portuguese: "Ele trabalha aqui?", structure: "Does + he + work + here?" },
+                { english: "He doesn't understand.", portuguese: "Ele nao entende.", structure: "He + doesn't + understand" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Falando sobre Familia",
+                context: "Voce esta mostrando fotos da sua familia para um amigo.",
+                lines: [
+                    { speaker: "A", english: "Who is this?", portuguese: "Quem e essa?" },
+                    { speaker: "B", english: "That's my mother. She's a teacher.", portuguese: "Essa e minha mae. Ela e professora." },
+                    { speaker: "A", english: "Nice! And who is this?", portuguese: "Legal! E quem e esse?" },
+                    { speaker: "B", english: "That's my father. He works at a bank.", portuguese: "Esse e meu pai. Ele trabalha em um banco." },
+                    { speaker: "A", english: "Do you have any brothers or sisters?", portuguese: "Voce tem irmaos ou irmas?" },
+                    { speaker: "B", english: "Yes, I have one sister. She studies medicine.", portuguese: "Sim, tenho uma irma. Ela estuda medicina." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "She works at a hospital.",
+                translation: "Ela trabalha em um hospital.",
+                response: "That's a great job! Hospitals need good workers.",
+                responseTranslation: "Isso e um otimo emprego! Hospitais precisam de bons funcionarios.",
+                tips: ["'Works' = trabalha (com She)", "'Hospital' = hospital"]
+            },
+            {
+                expected: "He lives in New York.",
+                translation: "Ele mora em Nova York.",
+                response: "New York is a beautiful city!",
+                responseTranslation: "Nova York e uma cidade linda!",
+                tips: ["'Lives' = mora (com He)", "'New York' = Nova York"]
+            },
+            {
+                expected: "She doesn't like spiders.",
+                translation: "Ela nao gosta de aranhas.",
+                response: "Me neither! Spiders are scary.",
+                responseTranslation: "Eu tambem nao! Aranhas sao assustadoras.",
+                tips: ["'Doesn't' = nao (com He/She/It)", "'Spiders' = aranhas"]
+            },
+            {
+                expected: "Does he speak English?",
+                translation: "Ele fala ingles?",
+                response: "Yes, he speaks English and Spanish.",
+                responseTranslation: "Sim, ele fala ingles e espanhol.",
+                tips: ["'Does' = auxiliar para perguntas", "'Speak' = falar"]
+            },
+            {
+                expected: "It rains a lot here.",
+                translation: "Chove muito aqui.",
+                response: "Yes, especially in the summer.",
+                responseTranslation: "Sim, especialmente no verao.",
+                tips: ["'It' = sujeito para clima", "'Rains' = chove"]
+            }
+        ]
+    },
+
+    10: {
+        title: "Verbos do Dia a Dia",
+        description: "50 verbos essenciais para o dia a dia em ingles",
+        level: "Intermediario",
+        duration: "30 min",
+
+        vocabulary: [
+            { word: "Go", translation: "Ir", pronunciation: "GOU", example: "I go to work." },
+            { word: "Come", translation: "Vir", pronunciation: "KAM", example: "Come here, please." },
+            { word: "Walk", translation: "Andar", pronunciation: "UOK", example: "I walk to school." },
+            { word: "Run", translation: "Correr", pronunciation: "RAN", example: "I run in the morning." },
+            { word: "Stop", translation: "Parar", pronunciation: "STOP", example: "Stop the car!" },
+            { word: "Make", translation: "Fazer/Criar", pronunciation: "MEIK", example: "I make breakfast." },
+            { word: "Take", translation: "Pegar/Levar", pronunciation: "TEIK", example: "Take this medicine." },
+            { word: "Give", translation: "Dar", pronunciation: "GIV", example: "Give me the book." },
+            { word: "Put", translation: "Colocar", pronunciation: "PUT", example: "Put it on the table." },
+            { word: "Get", translation: "Receber/Conseguir", pronunciation: "GET", example: "I get up at 7 AM." },
+            { word: "Find", translation: "Encontrar", pronunciation: "FAIND", example: "I can't find my keys." },
+            { word: "Say", translation: "Dizer", pronunciation: "SEI", example: "What did you say?" },
+            { word: "Tell", translation: "Contar/Dizer", pronunciation: "TEL", example: "Tell me a story." },
+            { word: "Ask", translation: "Perguntar", pronunciation: "ASK", example: "Can I ask you something?" },
+            { word: "Answer", translation: "Responder", pronunciation: "AN-ser", example: "Please answer the phone." },
+            { word: "Call", translation: "Ligar/Chamar", pronunciation: "KOL", example: "I'll call you later." },
+            { word: "Think", translation: "Pensar", pronunciation: "SINK", example: "I think it's good." },
+            { word: "Know", translation: "Saber", pronunciation: "NOU", example: "I know the answer." },
+            { word: "Understand", translation: "Entender", pronunciation: "UNDER-stand", example: "I understand now." },
+            { word: "Believe", translation: "Acreditar", pronunciation: "bi-LIIV", example: "I believe you." },
+            { word: "Like", translation: "Gostar", pronunciation: "LAIK", example: "I like this song." },
+            { word: "Love", translation: "Amar", pronunciation: "LAV", example: "I love my family." },
+            { word: "Hate", translation: "Odiar", pronunciation: "HEIT", example: "I hate Mondays." },
+            { word: "Want", translation: "Querer", pronunciation: "UONT", example: "I want water." },
+            { word: "Need", translation: "Precisar", pronunciation: "NIID", example: "I need help." },
+            { word: "Use", translation: "Usar", pronunciation: "IUS", example: "Can I use your phone?" },
+            { word: "Open", translation: "Abrir", pronunciation: "OU-pen", example: "Open the door." },
+            { word: "Close", translation: "Fechar", pronunciation: "KLOUS", example: "Close the window." },
+            { word: "Start", translation: "Comecar", pronunciation: "START", example: "The class starts at 9 AM." },
+            { word: "Finish", translation: "Terminar", pronunciation: "FI-nish", example: "I finish work at 5 PM." },
+            { word: "Wait", translation: "Esperar", pronunciation: "UEIT", example: "Wait for me!" },
+            { word: "Try", translation: "Tentar", pronunciation: "TRAI", example: "Try again." },
+            { word: "Begin", translation: "Comecar", pronunciation: "bi-GIN", example: "Let's begin." },
+            { word: "End", translation: "Terminar", pronunciation: "END", example: "The movie ends at 10 PM." },
+            { word: "Move", translation: "Mover/Mudar", pronunciation: "MUV", example: "I moved to a new house." },
+            { word: "Live", translation: "Morar/Viver", pronunciation: "LIV", example: "I live in Brazil." },
+            { word: "Die", translation: "Morrer", pronunciation: "DAI", example: "Plants die without water." },
+            { word: "Born", translation: "Nascer", pronunciation: "BORN", example: "I was born in 1990." },
+            { word: "Grow", translation: "Crescer", pronunciation: "GROU", example: "Children grow fast." },
+            { word: "Change", translation: "Mudar/Trocar", pronunciation: "CHEINJ", example: "I want to change my job." },
+            { word: "Stay", translation: "Ficar", pronunciation: "STEI", example: "I stay at home today." },
+            { word: "Leave", translation: "Sair/Deixar", pronunciation: "LIV", example: "I leave home at 7 AM." },
+            { word: "Arrive", translation: "Chegar", pronunciation: "a-RAIV", example: "I arrive at work at 8 AM." },
+            { word: "Return", translation: "Voltar", pronunciation: "ri-TERN", example: "I return home at 6 PM." },
+            { word: "Bring", translation: "Trazer", pronunciation: "BRING", example: "Bring me a coffee." },
+            { word: "Buy", translation: "Comprar", pronunciation: "BAI", example: "I buy groceries." },
+            { word: "Sell", translation: "Vender", pronunciation: "SEL", example: "They sell fruits." },
+            { word: "Pay", translation: "Pagar", pronunciation: "PEI", example: "I pay with card." },
+            { word: "Cost", translation: "Custar", pronunciation: "KOST", example: "It costs ten dollars." },
+            { word: "Spend", translation: "Gastar", pronunciation: "SPEND", example: "I spend money on food." }
+        ],
+
+        grammar: {
+            title: "Infinitivo vs. Forma Conjugada",
+            explanation: "Os verbos em ingles aparecem de duas formas principais: no infinitivo (forma basica) e conjugados (com mudancas para cada sujeito). Aprenda a reconhecer e usar cada forma.",
+            rules: [
+                {
+                    rule: "INFINITIVO (forma basica): go, come, make, take...",
+                    example: "I want to go home. (Eu quero ir para casa)",
+                    note: "Usado depois de outro verbo (want to, need to, like to)"
+                },
+                {
+                    rule: "CONJUGADO com I/You/We/They: go, come, make, take...",
+                    example: "I go to work. (Eu vou trabalhar)",
+                    note: "Mesma forma do infinitivo"
+                },
+                {
+                    rule: "CONJUGADO com He/She/It: goes, comes, makes, takes...",
+                    example: "She goes to school. (Ela vai para a escola)",
+                    note: "Adicionar -s/-es"
+                },
+                {
+                    rule: "VERBO + TO para acoes futuras",
+                    example: "I'm going to travel next month. (Eu vou viajar mes que vem)",
+                    note: "Planejamento futuro"
+                }
+            ],
+            sentences: [
+                { english: "I want to eat pizza.", portuguese: "Eu quero comer pizza.", structure: "I + want + to + eat + pizza" },
+                { english: "She needs to study.", portuguese: "Ela precisa estudar.", structure: "She + needs + to + study" },
+                { english: "We like to play soccer.", portuguese: "Nos gostamos de jogar futebol.", structure: "We + like + to + play + soccer" },
+                { english: "He goes to work at 8 AM.", portuguese: "Ele vai trabalhar as 8h.", structure: "He + goes + to + work + at + 8 AM" },
+                { english: "They don't want to leave.", portuguese: "Eles nao querem sair.", structure: "They + don't + want + to + leave" },
+                { english: "Does she like to cook?", portuguese: "Ela gosta de cozinhar?", structure: "Does + she + like + to + cook?" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Rotina Diaria",
+                context: "Voce esta contando sua rotina para um amigo.",
+                lines: [
+                    { speaker: "A", english: "What time do you wake up?", portuguese: "Que horas voce acorda?" },
+                    { speaker: "B", english: "I wake up at 6:30 AM.", portuguese: "Eu acordo as 6:30 da manha." },
+                    { speaker: "A", english: "What do you do in the morning?", portuguese: "O que voce faz de manha?" },
+                    { speaker: "B", english: "I take a shower and eat breakfast.", portuguese: "Eu tomo banho e tomo cafe da manha." },
+                    { speaker: "A", english: "What time do you start work?", portuguese: "Que horas voce comeca a trabalhar?" },
+                    { speaker: "B", english: "I start work at 8:30 AM.", portuguese: "Eu comeco a trabalhar as 8:30." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "I go to work at 8 AM.",
+                translation: "Eu vou trabalhar as 8h.",
+                response: "That's a good schedule!",
+                responseTranslation: "Esse e um bom horario!",
+                tips: ["'Go' = ir", "'At' = em (hora)"]
+            },
+            {
+                expected: "I need to study English.",
+                translation: "Eu preciso estudar ingles.",
+                response: "Practice every day and you'll improve!",
+                responseTranslation: "Pratique todo dia e voce vai melhorar!",
+                tips: ["'Need' = precisar", "'Study' = estudar"]
+            },
+            {
+                expected: "She doesn't like to wake up early.",
+                translation: "Ela nao gosta de acordar cedo.",
+                response: "Me neither! Mornings are hard.",
+                responseTranslation: "Eu tambem nao! Manhas sao dificeis.",
+                tips: ["'Doesn't' = nao (He/She/It)", "'Early' = cedo"]
+            },
+            {
+                expected: "We want to travel next year.",
+                translation: "Nos queremos viajar ano que vem.",
+                response: "Where do you want to go?",
+                responseTranslation: "Onde voces querem ir?",
+                tips: ["'Want' = querer", "'Travel' = viajar"]
+            },
+            {
+                expected: "He takes the bus to work.",
+                translation: "Ele pega o onibus para trabalhar.",
+                response: "The bus is cheap and fast.",
+                responseTranslation: "O onibus e barato e rapido.",
+                tips: ["'Takes' = pega (com He)", "'Bus' = onibus"]
+            }
+        ]
+    },
+
+    11: {
+        title: "Present Continuous",
+        description: "Aprenda a falar do que esta acontecendo agora",
+        level: "Intermediario",
+        duration: "25 min",
+
+        vocabulary: [
+            { word: "Working", translation: "Trabalhando", pronunciation: "UER-king", example: "I am working right now." },
+            { word: "Eating", translation: "Comendo", pronunciation: "II-ting", example: "She is eating lunch." },
+            { word: "Drinking", translation: "Bebendo", pronunciation: "DRINK-ing", example: "He is drinking coffee." },
+            { word: "Studying", translation: "Estudando", pronunciation: "STA-di-ing", example: "We are studying English." },
+            { word: "Playing", translation: "Jogando", pronunciation: "PLEI-ing", example: "The kids are playing outside." },
+            { word: "Reading", translation: "Lendo", pronunciation: "RII-ding", example: "She is reading a book." },
+            { word: "Writing", translation: "Escrevendo", pronunciation: "RAI-ting", example: "I am writing an email." },
+            { word: "Listening", translation: "Ouvindo/Escutando", pronunciation: "LIS-sen-ing", example: "I am listening to music." },
+            { word: "Watching", translation: "Assistindo", pronunciation: "UOTCH-ing", example: "He is watching TV." },
+            { word: "Cooking", translation: "Cozinhando", pronunciation: "KUK-ing", example: "She is cooking dinner." },
+            { word: "Sleeping", translation: "Dormindo", pronunciation: "SLI-ping", example: "The baby is sleeping." },
+            { word: "Exercising", translation: "Exercitando", pronunciation: "EK-ser-sai-zing", example: "I am exercising at the gym." },
+            { word: "Running", translation: "Correndo", pronunciation: "RAN-ing", example: "He is running in the park." },
+            { word: "Walking", translation: "Andando", pronunciation: "UOK-ing", example: "They are walking to school." },
+            { word: "Talking", translation: "Conversando", pronunciation: "TOK-ing", example: "She is talking on the phone." },
+            { word: "Singing", translation: "Cantando", pronunciation: "SING-ing", example: "He is singing a song." },
+            { word: "Dancing", translation: "Dançando", pronunciation: "DAN-sing", example: "They are dancing at the party." },
+            { word: "Cleaning", translation: "Limpando", pronunciation: "KLI-ning", example: "I am cleaning the house." },
+            { word: "Shopping", translation: "Comprando", pronunciation: "SHOP-ing", example: "She is shopping at the mall." },
+            { word: "Driving", translation: "Dirigindo", pronunciation: "DRAI-ving", example: "He is driving to work." },
+            { word: "Waiting", translation: "Esperando", pronunciation: "UEI-ting", example: "I am waiting for the bus." },
+            { word: "Thinking", translation: "Pensando", pronunciation: "SINK-ing", example: "I am thinking about you." },
+            { word: "Talking", translation: "Falando", pronunciation: "TOK-ing", example: "Who are you talking to?" },
+            { word: "Smiling", translation: "Sorrindo", pronunciation: "SMI-ling", example: "She is smiling." },
+            { word: "Crying", translation: "Chorando", pronunciation: "KRAI-ing", example: "The baby is crying." }
+        ],
+
+        grammar: {
+            title: "Present Continuous (am/is/are + -ing)",
+            explanation: "O Present Continuous serve para falar de acoes que estao acontecendo agora, neste momento. Usamos am/is/are + verbo-ing.",
+            rules: [
+                {
+                    rule: "I + AM + verbo-ing",
+                    example: "I am working right now. (Eu estou trabalhando agora)",
+                    note: "Usar 'am' so com I"
+                },
+                {
+                    rule: "He/She/It + IS + verbo-ing",
+                    example: "She is cooking dinner. (Ela esta cozinhando o jantar)",
+                    note: "Usar 'is' com He/She/It"
+                },
+                {
+                    rule: "You/We/They + ARE + verbo-ing",
+                    example: "They are playing soccer. (Eles estao jogando futebol)",
+                    note: "Usar 'are' com You/We/They"
+                },
+                {
+                    rule: "Como formar o -ing",
+                    example: "work > working, make > making, run > running",
+                    note: "Verbos terminados em -e: remover e adicionar -ing. Verbos curtos com vogal+consoante: duplicar a consoante."
+                }
+            ],
+            sentences: [
+                { english: "I am studying English.", portuguese: "Eu estou estudando ingles.", structure: "I + am + studying + English" },
+                { english: "She is cooking dinner.", portuguese: "Ela esta cozinhando o jantar.", structure: "She + is + cooking + dinner" },
+                { english: "They are playing soccer.", portuguese: "Eles estao jogando futebol.", structure: "They + are + playing + soccer" },
+                { english: "He is working right now.", portuguese: "Ele esta trabalhando agora.", structure: "He + is + working + right now" },
+                { english: "We are not sleeping.", portuguese: "Nos nao estamos dormindo.", structure: "We + are + not + sleeping" },
+                { english: "Are you listening to me?", portuguese: "Voce esta me ouvindo?", structure: "Are + you + listening + to + me?" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "O Que Voce Esta Fazendo?",
+                context: "Voce liga para um amigo e pergunta o que ele esta fazendo.",
+                lines: [
+                    { speaker: "A", english: "Hi! What are you doing?", portuguese: "Oii! O que voce esta fazendo?" },
+                    { speaker: "B", english: "I'm watching TV. And you?", portuguese: "Eu estou assistindo TV. E voce?" },
+                    { speaker: "A", english: "I'm studying English.", portuguese: "Eu estou estudando ingles." },
+                    { speaker: "B", english: "That's great! I'm learning too.", portuguese: "Otimo! Eu tambem estou aprendendo." },
+                    { speaker: "A", english: "What are you learning?", portuguese: "O que voce esta aprendendo?" },
+                    { speaker: "B", english: "I'm learning to cook. I'm making pasta.", portuguese: "Eu estou aprendendo a cozinhar. Estou fazendo massa." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "I am studying English right now.",
+                translation: "Eu estou estudando ingles agora.",
+                response: "That's wonderful! Keep practicing!",
+                responseTranslation: "Maravilhoso! Continue praticando!",
+                tips: ["'Am' = eu estou", "'Studying' = estudando"]
+            },
+            {
+                expected: "She is cooking dinner.",
+                translation: "Ela esta cozinhando o jantar.",
+                response: "What is she making?",
+                responseTranslation: "O que ela esta fazendo?",
+                tips: ["'Is' = ela esta", "'Cooking' = cozinhando"]
+            },
+            {
+                expected: "They are playing soccer.",
+                translation: "Eles estao jogando futebol.",
+                response: "Soccer is a great sport!",
+                responseTranslation: "Futebol e um otimo esporte!",
+                tips: ["'Are' = eles estao", "'Playing' = jogando"]
+            },
+            {
+                expected: "I'm not sleeping now.",
+                translation: "Eu nao estou dormindo agora.",
+                response: "Why not? Are you tired?",
+                responseTranslation: "Por que nao? Voce esta cansado?",
+                tips: ["'Not' = nao", "'Sleeping' = dormindo"]
+            },
+            {
+                expected: "Are you listening to me?",
+                translation: "Voce esta me ouvindo?",
+                response: "Yes, I'm listening. What did you say?",
+                responseTranslation: "Sim, estou ouvindo. O que voce disse?",
+                tips: ["'Are you' = voce esta", "'Listening' = ouvindo"]
+            }
+        ]
+    },
+
+    12: {
+        title: "Perguntas e Respostas",
+        description: "Aprenda a fazer perguntas com Do, Does, What, Where, When",
+        level: "Intermediario",
+        duration: "25 min",
+
+        vocabulary: [
+            { word: "What", translation: "O que", pronunciation: "UOT", example: "What is your name?" },
+            { word: "Where", translation: "Onde", pronunciation: "UER", example: "Where do you live?" },
+            { word: "When", translation: "Quando", pronunciation: "UEN", example: "When is your birthday?" },
+            { word: "Why", translation: "Por que", pronunciation: "UAI", example: "Why are you sad?" },
+            { word: "Who", translation: "Quem", pronunciation: "UU", example: "Who is that?" },
+            { word: "How", translation: "Como", pronunciation: "HAU", example: "How are you?" },
+            { word: "Which", translation: "Qual", pronunciation: "UITCH", example: "Which one do you want?" },
+            { word: "How much", translation: "Quanto (preco)", pronunciation: "HAU MARCH", example: "How much is this?" },
+            { word: "How many", translation: "Quantos (quantidade)", pronunciation: "HAU ME-nee", example: "How many children do you have?" },
+            { word: "How old", translation: "Quantos anos", pronunciation: "HAU OULD", example: "How old are you?" },
+            { word: "Always", translation: "Sempre", pronunciation: "AAL-ueis", example: "I always wake up early." },
+            { word: "Usually", translation: "Geralmente", pronunciation: "IUSU-ali", example: "I usually eat breakfast at 7 AM." },
+            { word: "Sometimes", translation: "As vezes", pronunciation: "SOM-taims", example: "I sometimes go to the gym." },
+            { word: "Often", translation: "Frequentemente", pronunciation: "OFEN", example: "I often read books." },
+            { word: "Never", translation: "Nunca", pronunciation: "NE-ver", example: "I never eat meat." },
+            { word: "Rarely", translation: "Raramente", pronunciation: "RER-li", example: "I rarely watch TV." },
+            { word: "Already", translation: "Ja", pronunciation: "AAL-REI-di", example: "I already ate." },
+            { word: "Yet", translation: "Ainda (nao)", pronunciation: "IET", example: "I haven't finished yet." },
+            { word: "Still", translation: "Ainda", pronunciation: "STIL", example: "I'm still studying." },
+            { word: "Just", translation: "Acabou de", pronunciation: "JAST", example: "I just arrived." },
+            { word: "Because", translation: "Porque", pronunciation: "bi-KOS", example: "I'm happy because it's sunny." },
+            { word: "So", translation: "Entao", pronunciation: "SOU", example: "I'm tired, so I'll sleep." },
+            { word: "But", translation: "Mas", pronunciation: "BAT", example: "I want to go, but I'm busy." },
+            { word: "And", translation: "E", pronunciation: "AND", example: "I like coffee and tea." },
+            { word: "Or", translation: "Ou", pronunciation: "OR", example: "Coffee or tea?" }
+        ],
+
+        grammar: {
+            title: "Como Fazer Perguntas em Ingles",
+            explanation: "Em ingles, as perguntas seguem uma ordem especifica. Aprenda a usar Do/Does para perguntas Sim/Nao e What/Where/When para perguntas abertas.",
+            rules: [
+                {
+                    rule: "DO + I/you/we/they + VERBO?",
+                    example: "Do you like coffee? (Voce gosta de cafe?)",
+                    note: "Pergunta Sim/Nao com I/you/we/they"
+                },
+                {
+                    rule: "DOES + he/she/it + VERBO?",
+                    example: "Does he work here? (Ele trabalha aqui?)",
+                    note: "Pergunta Sim/Nao com He/She/It"
+                },
+                {
+                    rule: "WHAT + do/does + sujeito + VERBO?",
+                    example: "What do you do? (O que voce faz?)",
+                    note: "Pergunta sobre COISA"
+                },
+                {
+                    rule: "WHERE + do/does + sujeito + VERBO?",
+                    example: "Where do you live? (Onde voce mora?)",
+                    note: "Pergunta sobre LUGAR"
+                },
+                {
+                    rule: "WHEN + do/does + sujeito + VERBO?",
+                    example: "When do you wake up? (Quando voce acorda?)",
+                    note: "Pergunta sobre TEMPO"
+                }
+            ],
+            sentences: [
+                { english: "What is your name?", portuguese: "Qual e o seu nome?", structure: "What + is + your + name?" },
+                { english: "Where do you live?", portuguese: "Onde voce mora?", structure: "Where + do + you + live?" },
+                { english: "When is your birthday?", portuguese: "Quando e seu aniversario?", structure: "When + is + your + birthday?" },
+                { english: "Why are you late?", portuguese: "Por que voce esta atrasado?", structure: "Why + are + you + late?" },
+                { english: "How do you spell your name?", portuguese: "Como voce soletra seu nome?", structure: "How + do + you + spell + your + name?" },
+                { english: "How much does this cost?", portuguese: "Quanto isso custa?", structure: "How much + does + this + cost?" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Entrevista Pessoal",
+                context: "Voce esta sendo entrevistado para um emprego.",
+                lines: [
+                    { speaker: "A", english: "What is your name?", portuguese: "Qual e o seu nome?" },
+                    { speaker: "B", english: "My name is Carlos Silva.", portuguese: "Meu nome e Carlos Silva." },
+                    { speaker: "A", english: "Where are you from?", portuguese: "De onde voce e?" },
+                    { speaker: "B", english: "I'm from São Paulo, Brazil.", portuguese: "Eu sou de Sao Paulo, Brasil." },
+                    { speaker: "A", english: "What do you do for a living?", portuguese: "O que voce faz da vida?" },
+                    { speaker: "B", english: "I work as a software developer.", portuguese: "Eu trabalho como desenvolvedor de software." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "What is your name?",
+                translation: "Qual e o seu nome?",
+                response: "My name is Sarah. Nice to meet you!",
+                responseTranslation: "Meu nome e Sarah. Prazer em te conhecer!",
+                tips: ["'What' = o que", "'Name' = nome"]
+            },
+            {
+                expected: "Where do you live?",
+                translation: "Onde voce mora?",
+                response: "I live in New York City.",
+                responseTranslation: "Eu moro em Nova York.",
+                tips: ["'Where' = onde", "'Live' = morar"]
+            },
+            {
+                expected: "How much does this cost?",
+                translation: "Quanto isso custa?",
+                response: "This costs twenty dollars.",
+                responseTranslation: "Isso custa vinte dolares.",
+                tips: ["'How much' = quanto", "'Cost' = custar"]
+            },
+            {
+                expected: "Why are you learning English?",
+                translation: "Por que voce esta aprendendo ingles?",
+                response: "Because I want to travel.",
+                responseTranslation: "Porque eu quero viajar.",
+                tips: ["'Why' = por que", "'Learning' = aprendendo"]
+            },
+            {
+                expected: "When do you start work?",
+                translation: "Quando voce comeca a trabalhar?",
+                response: "I start work at 9 AM.",
+                responseTranslation: "Eu comeco a trabalhar as 9h.",
+                tips: ["'When' = quando", "'Start' = comecar"]
+            }
+        ]
+    },
+
+    13: {
+        title: "Lugares e Locucoes",
+        description: "Aprenda a falar sobre lugares e onde voce esta",
+        level: "Intermediario",
+        duration: "30 min",
+
+        vocabulary: [
+            { word: "Home", translation: "Casa", pronunciation: "HOUM", example: "I am at home." },
+            { word: "Work", translation: "Trabalho", pronunciation: "UERK", example: "I am at work." },
+            { word: "School", translation: "Escola", pronunciation: "SKUL", example: "The children are at school." },
+            { word: "Store", translation: "Loja", pronunciation: "STOR", example: "I'm at the store." },
+            { word: "Hospital", translation: "Hospital", pronunciation: "HOS-pi-tal", example: "She works at a hospital." },
+            { word: "Restaurant", translation: "Restaurante", pronunciation: "RES-to-rint", example: "We are at a restaurant." },
+            { word: "Bank", translation: "Banco", pronunciation: "BANK", example: "I need to go to the bank." },
+            { word: "Park", translation: "Parque", pronunciation: "PARK", example: "The kids are playing in the park." },
+            { word: "Gym", translation: "Academia", pronunciation: "JIM", example: "I exercise at the gym." },
+            { word: "Office", translation: "Escritorio", pronunciation: "OF-iss", example: "I work in an office." },
+            { word: "Library", translation: "Biblioteca", pronunciation: "LAI-bra-ri", example: "I study at the library." },
+            { word: "Market", translation: "Mercado", pronunciation: "MAR-ket", example: "I buy food at the market." },
+            { word: "Pharmacy", translation: "Farmacia", pronunciation: "FAR-ma-si", example: "I need to go to the pharmacy." },
+            { word: "Church", translation: "Igreja", pronunciation: "CHERCH", example: "She goes to church on Sunday." },
+            { word: "Station", translation: "Estacao", pronunciation: "STEI-shon", example: "The train station is near here." },
+            { word: "Airport", translation: "Aeroporto", pronunciation: "E-ro-port", example: "I need to go to the airport." },
+            { word: "Hotel", translation: "Hotel", pronunciation: "hou-TEL", example: "We are staying at a hotel." },
+            { word: "Beach", translation: "Praia", pronunciation: "BIICH", example: "I love the beach." },
+            { word: "Mall", translation: "Shopping", pronunciation: "MAL", example: "She is at the mall." },
+            { word: "Cinema", translation: "Cinema", pronunciation: "SI-ne-ma", example: "We are at the cinema." },
+            { word: "At", translation: "Em/No/N", pronunciation: "AT", example: "I am at home." },
+            { word: "In", translation: "Em/Dentro", pronunciation: "IN", example: "I am in the office." },
+            { word: "On", translation: "Em/Sobre", pronunciation: "ON", example: "The book is on the table." },
+            { word: "Near", translation: "Perto", pronunciation: "NIIR", example: "The bank is near my house." },
+            { word: "Next to", translation: "Ao lado de", pronunciation: "NEKST tu", example: "The pharmacy is next to the bank." },
+            { word: "Behind", translation: "Atras", pronunciation: "bi-HAIND", example: "The park is behind the school." },
+            { word: "In front of", translation: "Em frente a", pronunciation: "IN frunt of", example: "I am in front of the store." },
+            { word: "Between", translation: "Entre", pronunciation: "bi-TUUN", example: "The bank is between the store and the park." },
+            { word: "Across from", translation: "Do outro lado", pronunciation: "a-KROS from", example: "The restaurant is across from the bank." },
+            { word: "Far", translation: "Longe", pronunciation: "FAR", example: "The airport is far from here." }
+        ],
+
+        grammar: {
+            title: "Preposicoes de Lugar",
+            explanation: "As preposicoes de lugar indicam onde algo ou alguem esta. Aprenda a usar at, in, on, near, next to, behind, in front of, between e across from.",
+            rules: [
+                {
+                    rule: "AT + lugar (ponto especifico)",
+                    example: "I am at home. (Eu estou em casa)",
+                    note: "Usar 'at' para pontos especificos: at home, at work, at school"
+                },
+                {
+                    rule: "IN + lugar (dentro de)",
+                    example: "I am in the office. (Eu estou dentro do escritorio)",
+                    note: "Usar 'in' para espacos fechados: in the room, in the car"
+                },
+                {
+                    rule: "ON + superficie",
+                    example: "The book is on the table. (O livro esta na mesa)",
+                    note: "Usar 'on' para superficies: on the table, on the wall"
+                },
+                {
+                    rule: "NEAR / NEXT TO / BEHIND / IN FRONT OF",
+                    example: "The bank is next to the park. (O banco e ao lado do parque)",
+                    note: "Para posicoes relativas entre lugares"
+                }
+            ],
+            sentences: [
+                { english: "I am at home.", portuguese: "Eu estou em casa.", structure: "I + am + at + home" },
+                { english: "She works in an office.", portuguese: "Ela trabalha em um escritorio.", structure: "She + works + in + an + office" },
+                { english: "The book is on the table.", portuguese: "O livro esta na mesa.", structure: "The + book + is + on + the + table" },
+                { english: "The bank is near my house.", portuguese: "O banco e perto da minha casa.", structure: "The + bank + is + near + my + house" },
+                { english: "The pharmacy is next to the bank.", portuguese: "A farmacia e ao lado do banco.", structure: "The + pharmacy + is + next to + the + bank" },
+                { english: "I am in front of the store.", portuguese: "Eu estou em frente a loja.", structure: "I + am + in front of + the + store" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Pedindo Direcoes",
+                context: "Voce esta em uma cidade nova e precisa de ajuda para encontrar lugares.",
+                lines: [
+                    { speaker: "A", english: "Excuse me, where is the bank?", portuguese: "Com licenca, onde e o banco?" },
+                    { speaker: "B", english: "The bank is on Main Street.", portuguese: "O banco e na Rua Main." },
+                    { speaker: "A", english: "Is it near the park?", portuguese: "E perto do parque?" },
+                    { speaker: "B", english: "Yes, it's next to the park.", portuguese: "Sim, e ao lado do parque." },
+                    { speaker: "A", english: "Thank you very much!", portuguese: "Muito obrigado!" },
+                    { speaker: "B", english: "You're welcome! Have a nice day!", portuguese: "De nada! Tenha um otimo dia!" }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "I am at home right now.",
+                translation: "Eu estou em casa agora.",
+                response: "Nice! Are you relaxing?",
+                responseTranslation: "Legal! Voce esta relaxando?",
+                tips: ["'At' = em (lugar)", "'Home' = casa"]
+            },
+            {
+                expected: "Where is the nearest pharmacy?",
+                translation: "Onde e a farmacia mais proxima?",
+                response: "It's on Oak Street, next to the bank.",
+                responseTranslation: "E na Rua Oak, ao lado do banco.",
+                tips: ["'Where' = onde", "'Pharmacy' = farmacia"]
+            },
+            {
+                expected: "The restaurant is across from the park.",
+                translation: "O restaurante e do outro lado do parque.",
+                response: "Oh, I know that restaurant! It's great!",
+                responseTranslation: "Ah, eu conheco aquele restaurante! E otimo!",
+                tips: ["'Across from' = do outro lado", "'Restaurant' = restaurante"]
+            },
+            {
+                expected: "I work in an office downtown.",
+                translation: "Eu trabalho em um escritorio no centro.",
+                response: "That's convenient! Is it near the station?",
+                responseTranslation: "Isso e conveniente! E perto da estacao?",
+                tips: ["'In' = dentro de", "'Office' = escritorio"]
+            },
+            {
+                expected: "The school is between the bank and the store.",
+                translation: "A escola e entre o banco e a loja.",
+                response: "I see. Thank you for the directions!",
+                responseTranslation: "Entendi. Obrigado pelas direcoes!",
+                tips: ["'Between' = entre", "'School' = escola"]
+            }
+        ]
+    },
+
+    14: {
+        title: "Conversacao Combinada",
+        description: "Use tudo junto: Present Simple, Continuous, perguntas e lugares",
+        level: "Intermediario",
+        duration: "30 min",
+
+        vocabulary: [
+            { word: "And", translation: "E", pronunciation: "AND", example: "I like coffee and tea." },
+            { word: "But", translation: "Mas", pronunciation: "BAT", example: "I want to go, but I'm busy." },
+            { word: "Because", translation: "Porque", pronunciation: "bi-KOS", example: "I'm happy because it's sunny." },
+            { word: "So", translation: "Entao", pronunciation: "SOU", example: "I'm tired, so I'll sleep." },
+            { word: "Then", translation: "Entao/Depois", pronunciation: "DHEN", example: "I eat, then I work." },
+            { word: "After", translation: "Depois", pronunciation: "AF-ter", example: "After work, I go home." },
+            { word: "Before", translation: "Antes", pronunciation: "bi-FORE", example: "Before dinner, I wash my hands." },
+            { word: "While", translation: "Enquanto", pronunciation: "UAIL", example: "While I cook, I listen to music." },
+            { word: "Also", translation: "Tambem", pronunciation: "AAL-sou", example: "I also speak Spanish." },
+            { word: "Too", translation: "Tambem", pronunciation: "TUU", example: "Me too!" },
+            { word: "Together", translation: "Juntos", pronunciation: "tu-GE-dher", example: "We work together." },
+            { word: "Alone", translation: "Sozinho", pronunciation: "a-LOUN", example: "I am alone at home." },
+            { word: "Every", translation: "Todo/Cada", pronunciation: "E-ve-ree", example: "I exercise every day." },
+            { word: "Both", translation: "Ambos", pronunciation: "BOUTH", example: "Both students are studying." },
+            { word: "Each", translation: "Cada", pronunciation: "IICH", example: "Each student has a book." },
+            { word: "Another", translation: "Outro", pronunciation: "a-NA-dher", example: "I want another coffee." },
+            { word: "Other", translation: "Outro/Outra", pronunciation: "A-dher", example: "The other students are here." },
+            { word: "Same", translation: "Mesmo", pronunciation: "SEIM", example: "We have the same age." },
+            { word: "Different", translation: "Diferente", pronunciation: "DI-fe-rent", example: "We have different jobs." },
+            { word: "First", translation: "Primeiro", pronunciation: "FERST", example: "First, I wake up." },
+            { word: "Last", translation: "Ultimo", pronunciation: "LAST", example: "Last, I go to bed." },
+            { word: "Next", translation: "Proximo", pronunciation: "NEKST", example: "Next, I take a shower." },
+            { word: "Now", translation: "Agora", pronunciation: "NAU", example: "I am studying now." },
+            { word: "Later", translation: "Mais tarde", pronunciation: "LEI-ter", example: "I'll call you later." },
+            { word: "Soon", translation: "Em breve", pronunciation: "SUUN", example: "See you soon!" },
+            { word: "Already", translation: "Ja", pronunciation: "AAL-REI-di", example: "I already ate." },
+            { word: "Yet", translation: "Ainda (nao)", pronunciation: "IET", example: "I haven't finished yet." },
+            { word: "Always", translation: "Sempre", pronunciation: "AAL-ueis", example: "I always wake up early." },
+            { word: "Sometimes", translation: "As vezes", pronunciation: "SOM-taims", example: "I sometimes go to the gym." },
+            { word: "Never", translation: "Nunca", pronunciation: "NE-ver", example: "I never eat meat." }
+        ],
+
+        grammar: {
+            title: "Juntando Tudo em Frases Maiores",
+            explanation: "Agora voce pode combinar Present Simple, Present Continuous, perguntas e locucoes para criar frases mais completas e naturais.",
+            rules: [
+                {
+                    rule: "PRESENTE SIMPLES + PRESENTE CONTINUOUS",
+                    example: "I usually work, but today I'm working from home. (Eu geralmente trabalho, mas hoje estou trabalhando de casa)",
+                    note: "Rotina (simple) + Agora (continuous)"
+                },
+                {
+                    rule: "PERGUNTAS + RESPOSTAS COMPLETAS",
+                    example: "Where do you work? I work at a bank in the center. (Onde voce trabalha? Eu trabalho em um banco no centro.)",
+                    note: "Pergunta + Resposta com detalhes"
+                },
+                {
+                    rule: "CONNECTORES: and, but, because, so, then",
+                    example: "I wake up, then I take a shower, and I go to work. (Eu acordo, depois tomo banho, e vou trabalhar)",
+                    note: "Juntar varias acoes em sequencia"
+                },
+                {
+                    rule: "LUGARES + ACOES",
+                    example: "I am at home because I work from home. (Eu estou em casa porque trabalho de casa)",
+                    note: "Combinar lugar + acao + motivo"
+                }
+            ],
+            sentences: [
+                { english: "I usually wake up at 7 AM, but today I woke up at 6 AM.", portuguese: "Eu geralmente acordo as 7h, mas hoje acordei as 6h.", structure: "I + usually + wake up + at + time, but + today + I + woke up + at + time" },
+                { english: "She works at a hospital and she loves her job.", portuguese: "Ela trabalha em um hospital e ama seu emprego.", structure: "She + works + at + hospital + and + she + loves + her + job" },
+                { english: "Where do you live? I live in São Paulo, near the beach.", portuguese: "Onde voce mora? Eu moro em Sao Paulo, perto da praia.", structure: "Where + do + you + live? + I + live + in + place, + near + place" },
+                { english: "I'm studying English because I want to travel.", portuguese: "Eu estou estudando ingles porque quero viajar.", structure: "I'm + studying + English + because + I + want + to + travel" },
+                { english: "We are at the restaurant and we are ordering food.", portuguese: "Nos estamos no restaurante e estamos pedindo comida.", structure: "We + are + at + place + and + we + are + ordering + food" },
+                { english: "He doesn't like coffee, but he drinks it every morning.", portuguese: "Ele nao gosta de cafe, mas ele bebe todo dia de manha.", structure: "He + doesn't + like + coffee, + but + he + drinks + it + every + morning" }
+            ]
+        },
+
+        conversations: [
+            {
+                title: "Conversa Completa",
+                context: "Voce esta em uma cafeteria com um amigo, conversando sobre a vida.",
+                lines: [
+                    { speaker: "A", english: "Hi! How are you?", portuguese: "Oii! Como voce esta?" },
+                    { speaker: "B", english: "I'm good, thanks! I'm drinking coffee.", portuguese: "Eu estou bem, obrigado! Estou tomando cafe." },
+                    { speaker: "A", english: "Nice! I usually drink coffee in the morning.", portuguese: "Legal! Eu geralmente tomo cafe de manha." },
+                    { speaker: "B", english: "Me too. What do you do for a living?", portuguese: "Eu tambem. O que voce faz da vida?" },
+                    { speaker: "A", english: "I work at a bank. And you?", portuguese: "Eu trabalho em um banco. E voce?" },
+                    { speaker: "B", english: "I'm a teacher. I work at a school near here.", portuguese: "Eu sou professor. Eu trabalho em uma escola perto daqui." }
+                ]
+            }
+        ],
+
+        phrases: [
+            {
+                expected: "I usually wake up at 7 AM.",
+                translation: "Eu geralmente acordo as 7h.",
+                response: "That's early! I wake up at 8 AM.",
+                responseTranslation: "Isso e cedo! Eu acordo as 8h.",
+                tips: ["'Usually' = geralmente", "'Wake up' = acordar"]
+            },
+            {
+                expected: "I am at home because I work from home.",
+                translation: "Eu estou em casa porque trabalho de casa.",
+                response: "Working from home is great!",
+                responseTranslation: "Trabalhar de casa e otimo!",
+                tips: ["'At home' = em casa", "'Because' = porque"]
+            },
+            {
+                expected: "She works at a hospital and she loves her job.",
+                translation: "Ela trabalha em um hospital e ama seu emprego.",
+                response: "That's wonderful! She must be a great doctor.",
+                responseTranslation: "Maravilhoso! Ela deve ser uma otima medica.",
+                tips: ["'Works' = trabalha", "'Loves' = ama"]
+            },
+            {
+                expected: "Where do you work? I work at a bank.",
+                translation: "Onde voce trabalha? Eu trabalho em um banco.",
+                response: "A bank? That's interesting work!",
+                responseTranslation: "Um banco? Isso e trabalho interessante!",
+                tips: ["'Where' = onde", "'Work' = trabalhar"]
+            },
+            {
+                expected: "I'm studying English because I want to travel.",
+                translation: "Eu estou estudando ingles porque quero viajar.",
+                response: "Traveling is the best way to learn!",
+                responseTranslation: "Viajar e a melhor forma de aprender!",
+                tips: ["'Studying' = estudando", "'Because' = porque"]
+            }
+        ]
     }
 };
 
@@ -3647,6 +4528,579 @@ const conversationScenarios = {
             {text: "Great English!", translation: "Inglês excelente!"},
             {text: "You're doing fantastic!", translation: "Você está fazendo fantástico!"},
             {text: "Excellent job!", translation: "Excelente trabalho!"}
+        ]
+    },
+
+    // ============================================
+    // MODULO 2 - NOVOS CENARIOS DE CONVERSACAO
+    // ============================================
+
+    7: {
+        title: "Apresentacao Pessoal",
+        description: "Apresente-se e fale sobre voce mesmo",
+        icon: "👤",
+        questions: [
+            {
+                id: "q1",
+                question: "What is your name?",
+                translation: "Qual e o seu nome?",
+                expectedAnswers: ["my name", "i am", "i'm", "name is"],
+                followUp: {
+                    success: ["Nice to meet you!", "That's a great name!", "Beautiful name!"],
+                    fail: ["Say 'My name is...' (Meu nome e...)", "Try: 'I am...' (Eu sou...)"]
+                },
+                tips: ["Say 'My name is...' or 'I am...'"]
+            },
+            {
+                id: "q2",
+                question: "How old are you?",
+                translation: "Quantos anos voce tem?",
+                expectedAnswers: ["i am", "i'm", "years old", "years"],
+                followUp: {
+                    success: ["Great!", "Wonderful!", "That's a good age!"],
+                    fail: ["Say 'I am... years old' (Eu tenho... anos)"]
+                },
+                tips: ["Say 'I am [number] years old'"]
+            },
+            {
+                id: "q3",
+                question: "Where are you from?",
+                translation: "De onde voce e?",
+                expectedAnswers: ["i am from", "i'm from", "from brazil", "from sao paulo"],
+                followUp: {
+                    success: ["Brazil is beautiful!", "I love Brazil!", "What a great country!"],
+                    fail: ["Say 'I am from...' (Eu sou de...)"]
+                },
+                tips: ["Say 'I am from Brazil' or 'I am from São Paulo'"]
+            },
+            {
+                id: "q4",
+                question: "What do you do for a living?",
+                translation: "O que voce faz da vida?",
+                expectedAnswers: ["i work", "i am a", "i'm a", "i am a student", "i'm a student"],
+                followUp: {
+                    success: ["That's interesting!", "Great job!", "I respect that!"],
+                    fail: ["Say 'I work at...' or 'I am a...' (Eu trabalho em... ou Eu sou...)"]
+                },
+                tips: ["Say 'I work at...' or 'I am a...'"]
+            },
+            {
+                id: "q5",
+                question: "Where do you live?",
+                translation: "Onde voce mora?",
+                expectedAnswers: ["i live", "i live in", "i live at", "i live on"],
+                followUp: {
+                    success: ["That's a nice place!", "I love that city!", "Beautiful location!"],
+                    fail: ["Say 'I live in...' (Eu moro em...)"]
+                },
+                tips: ["Say 'I live in [city]'"]
+            },
+            {
+                id: "q6",
+                question: "Do you have any brothers or sisters?",
+                translation: "Voce tem irmaos ou irmas?",
+                expectedAnswers: ["yes i have", "i have one", "i have two", "no i don't", "no i do not"],
+                followUp: {
+                    success: ["Family is important!", "That's wonderful!", "Nice family!"],
+                    fail: ["Say 'Yes, I have...' or 'No, I don't...'"]
+                },
+                tips: ["Say 'Yes, I have...' or 'No, I don't'"]
+            },
+            {
+                id: "q7",
+                question: "What do you like to do in your free time?",
+                translation: "O que voce gosta de fazer no seu tempo livre?",
+                expectedAnswers: ["i like", "i enjoy", "i love", "i like to", "i enjoy to"],
+                followUp: {
+                    success: ["That sounds fun!", "Great hobby!", "I like that too!"],
+                    fail: ["Say 'I like to...' or 'I enjoy...' (Eu gosto de...)"]
+                },
+                tips: ["Say 'I like to [verb]' or 'I enjoy [verb]-ing'"]
+            },
+            {
+                id: "q8",
+                question: "Why are you learning English?",
+                translation: "Por que voce esta aprendendo ingles?",
+                expectedAnswers: ["because", "i want to", "for work", "for travel", "to travel", "to work"],
+                followUp: {
+                    success: ["That's a great reason!", "You're doing great!", "Keep learning!"],
+                    fail: ["Say 'Because...' or 'I want to...' (Porque... ou Eu quero...)"]
+                },
+                tips: ["Say 'Because...' or 'I want to...'"]
+            }
+        ],
+        encouragements: [
+            {text: "You introduced yourself perfectly!", translation: "Voce se apresentou perfeitamente!"},
+            {text: "Great introduction!", translation: "Otima apresentacao!"},
+            {text: "Your English is improving!", translation: "Seu ingles esta melhorando!"},
+            {text: "Wonderful! Keep going!", translation: "Maravilhoso! Continue!"},
+            {text: "You're doing amazing!", translation: "Voce esta fazendo incrivel!"},
+            {text: "Excellent self-introduction!", translation: "Excelente autoapresentacao!"}
+        ]
+    },
+
+    8: {
+        title: "No Trabalho",
+        description: "Fale sobre seu trabalho e rotina profissional",
+        icon: "💼",
+        questions: [
+            {
+                id: "q1",
+                question: "What do you do for work?",
+                translation: "O que voce faz para trabalhar?",
+                expectedAnswers: ["i work", "i am a", "i'm a", "i work at", "i work in"],
+                followUp: {
+                    success: ["That's a great profession!", "Interesting job!", "I respect that!"],
+                    fail: ["Say 'I work at...' or 'I am a...'"]
+                },
+                tips: ["Say 'I work at [place]' or 'I am a [job]'"]
+            },
+            {
+                id: "q2",
+                question: "Where do you work?",
+                translation: "Onde voce trabalha?",
+                expectedAnswers: ["i work at", "i work in", "at a", "in an", "in a"],
+                followUp: {
+                    success: ["That sounds nice!", "Great workplace!", "I like that place!"],
+                    fail: ["Say 'I work at [place]'"]
+                },
+                tips: ["Say 'I work at a [place]'"]
+            },
+            {
+                id: "q3",
+                question: "What time do you start work?",
+                translation: "Que horas voce comeca a trabalhar?",
+                expectedAnswers: ["i start", "at", "in the morning", "am", "pm"],
+                followUp: {
+                    success: ["Early bird!", "That's a good schedule!", "Nice routine!"],
+                    fail: ["Say 'I start at [time]'"]
+                },
+                tips: ["Say 'I start at [time] AM/PM'"]
+            },
+            {
+                id: "q4",
+                question: "Do you like your job?",
+                translation: "Voce gosta do seu trabalho?",
+                expectedAnswers: ["yes", "i like", "i love", "yes i do", "yes i love"],
+                followUp: {
+                    success: ["That's wonderful!", "Job satisfaction is important!", "Great!"],
+                    fail: ["Say 'Yes, I love my job' or 'Yes, I like it'"]
+                },
+                tips: ["Say 'Yes, I love/like my job'"]
+            },
+            {
+                id: "q5",
+                question: "What do you do at work?",
+                translation: "O que voce faz no trabalho?",
+                expectedAnswers: ["i work on", "i help", "i manage", "i create", "i build", "i write", "i sell"],
+                followUp: {
+                    success: ["Sounds interesting!", "That's important work!", "Great responsibilities!"],
+                    fail: ["Say 'I work on...' or 'I help...'"]
+                },
+                tips: ["Describe what you do: 'I work on...', 'I help...'"]
+            },
+            {
+                id: "q6",
+                question: "Do you work with other people?",
+                translation: "Voce trabalha com outras pessoas?",
+                expectedAnswers: ["yes", "yes i do", "i work with", "my team", "my colleagues"],
+                followUp: {
+                    success: ["Teamwork is great!", "That's nice!", "Collaboration is important!"],
+                    fail: ["Say 'Yes, I work with...' or 'Yes, with my team'"]
+                },
+                tips: ["Say 'Yes, I work with my team' or 'Yes, with my colleagues'"]
+            },
+            {
+                id: "q7",
+                question: "What do you like most about your job?",
+                translation: "O que voce mais gosta no seu trabalho?",
+                expectedAnswers: ["i like", "i enjoy", "the people", "the hours", "the salary", "the work"],
+                followUp: {
+                    success: ["That's a great reason!", "I understand!", "That's important!"],
+                    fail: ["Say 'I like...' or 'I enjoy...'"]
+                },
+                tips: ["Say 'I like the [thing]' or 'I enjoy...'"]
+            }
+        ],
+        encouragements: [
+            {text: "You're a professional speaker!", translation: "Voce e um falante profissional!"},
+            {text: "Your work vocabulary is excellent!", translation: "Seu vocabulario de trabalho e excelente!"},
+            {text: "Great job describing your work!", translation: "Otimo trabalho descrevendo seu emprego!"},
+            {text: "You sound very professional!", translation: "Voce soa muito profissional!"},
+            {text: "Keep practicing work English!", translation: "Continue praticando ingles de trabalho!"},
+            {text: "Excellent work vocabulary!", translation: "Excelente vocabulario de trabalho!"}
+        ]
+    },
+
+    9: {
+        title: "Na Escola",
+        description: "Fale sobre seus estudos e vida escolar",
+        icon: "📚",
+        questions: [
+            {
+                id: "q1",
+                question: "Are you a student?",
+                translation: "Voce e estudante?",
+                expectedAnswers: ["yes", "yes i am", "i am a student", "i'm a student", "no"],
+                followUp: {
+                    success: ["That's great!", "Education is important!", "Keep studying!"],
+                    fail: ["Say 'Yes, I am a student' or 'No, I'm not'"]
+                },
+                tips: ["Say 'Yes, I am' or 'No, I'm not'"]
+            },
+            {
+                id: "q2",
+                question: "What do you study?",
+                translation: "O que voce estuda?",
+                expectedAnswers: ["i study", "i study english", "i study math", "i study science"],
+                followUp: {
+                    success: ["That's interesting!", "Great subject!", "Education is key!"],
+                    fail: ["Say 'I study [subject]'"]
+                },
+                tips: ["Say 'I study [subject]'"]
+            },
+            {
+                id: "q3",
+                question: "Where do you study?",
+                translation: "Onde voce estuda?",
+                expectedAnswers: ["i study at", "at school", "at university", "at college", "at home"],
+                followUp: {
+                    success: ["That's a good school!", "Great institution!", "I like that place!"],
+                    fail: ["Say 'I study at [place]'"]
+                },
+                tips: ["Say 'I study at [school/university]'"]
+            },
+            {
+                id: "q4",
+                question: "What time does your class start?",
+                translation: "Que horas sua aula comeca?",
+                expectedAnswers: ["at", "in the morning", "am", "pm", "class starts"],
+                followUp: {
+                    success: ["Early start!", "That's a good time!", "Nice schedule!"],
+                    fail: ["Say 'My class starts at [time]'"]
+                },
+                tips: ["Say 'My class starts at [time]'"]
+            },
+            {
+                id: "q5",
+                question: "Do you like studying English?",
+                translation: "Voce gosta de estudar ingles?",
+                expectedAnswers: ["yes", "yes i do", "i like", "i love", "yes i like", "yes i love"],
+                followUp: {
+                    success: ["That's why you're improving!", "Great attitude!", "Keep it up!"],
+                    fail: ["Say 'Yes, I like/love studying English'"]
+                },
+                tips: ["Say 'Yes, I love/like it'"]
+            },
+            {
+                id: "q6",
+                question: "What is your favorite subject?",
+                translation: "Qual e sua materia favorita?",
+                expectedAnswers: ["my favorite", "i like", "i love", "favorite subject"],
+                followUp: {
+                    success: ["Great choice!", "That's interesting!", "I like that too!"],
+                    fail: ["Say 'My favorite subject is...' or 'I like...'"]
+                },
+                tips: ["Say 'My favorite subject is [subject]'"]
+            },
+            {
+                id: "q7",
+                question: "Do you have homework today?",
+                translation: "Voce tem licao de casa hoje?",
+                expectedAnswers: ["yes", "yes i do", "no", "no i don't", "i have", "i don't have"],
+                followUp: {
+                    success: ["Homework is important!", "Keep studying!", "That's good!"],
+                    fail: ["Say 'Yes, I have homework' or 'No, I don't'"]
+                },
+                tips: ["Say 'Yes, I have homework' or 'No, I don't'"]
+            }
+        ],
+        encouragements: [
+            {text: "You're a great student!", translation: "Voce e um otimo estudante!"},
+            {text: "Your school English is excellent!", translation: "Seu ingles escolar e excelente!"},
+            {text: "Keep studying hard!", translation: "Continue estudando muito!"},
+            {text: "Education is the key to success!", translation: "Educacao e a chave do sucesso!"},
+            {text: "You're learning so fast!", translation: "Voce esta aprendendo tao rapido!"},
+            {text: "Excellent school vocabulary!", translation: "Excelente vocabulario escolar!"}
+        ]
+    },
+
+    10: {
+        title: "Fim de Semana",
+        description: "Fale sobre seus planos de fim de semana",
+        icon: "🎉",
+        questions: [
+            {
+                id: "q1",
+                question: "What do you usually do on weekends?",
+                translation: "O que voce geralmente faz nos fins de semana?",
+                expectedAnswers: ["i usually", "i go", "i like to", "i relax", "i rest"],
+                followUp: {
+                    success: ["Sounds fun!", "That's relaxing!", "Great weekend plan!"],
+                    fail: ["Say 'I usually...' or 'I like to...'"]
+                },
+                tips: ["Say 'I usually [activity]' or 'I like to [verb]'"]
+            },
+            {
+                id: "q2",
+                question: "Do you like to stay at home or go out?",
+                translation: "Voce gosta de ficar em casa ou sair?",
+                expectedAnswers: ["stay at home", "go out", "i like to stay", "i like to go"],
+                followUp: {
+                    success: ["Both are great!", "That's nice!", "I understand!"],
+                    fail: ["Say 'I like to stay at home' or 'I like to go out'"]
+                },
+                tips: ["Say 'I like to [stay/go]'"]
+            },
+            {
+                id: "q3",
+                question: "What do you do with your family on weekends?",
+                translation: "O que voce faz com sua familia nos fins de semana?",
+                expectedAnswers: ["we go", "we eat", "we watch", "we play", "we visit"],
+                followUp: {
+                    success: ["Family time is important!", "That's wonderful!", "Great family activity!"],
+                    fail: ["Say 'We usually...' or 'We go...'"]
+                },
+                tips: ["Say 'We usually [activity]'"]
+            },
+            {
+                id: "q4",
+                question: "Do you exercise on weekends?",
+                translation: "Voce se exercita nos fins de semana?",
+                expectedAnswers: ["yes", "yes i do", "i go to", "i run", "i walk", "no"],
+                followUp: {
+                    success: ["Exercise is important!", "Stay healthy!", "Great habit!"],
+                    fail: ["Say 'Yes, I...' or 'No, I don't'"]
+                },
+                tips: ["Say 'Yes, I go to the gym' or 'No, I don't'"]
+            },
+            {
+                id: "q5",
+                question: "What did you do last weekend?",
+                translation: "O que voce fez no fim de semana passado?",
+                expectedAnswers: ["i went", "i stayed", "i watched", "i visited", "i played"],
+                followUp: {
+                    success: ["That sounds fun!", "Great weekend!", "I like that!"],
+                    fail: ["Say 'I went...' or 'I stayed...' (passado)"]
+                },
+                tips: ["Use past tense: 'I went...', 'I watched...'"]
+            },
+            {
+                id: "q6",
+                question: "Do you have any plans for next weekend?",
+                translation: "Voce tem algum plano para o proximo fim de semana?",
+                expectedAnswers: ["yes", "i plan to", "i want to", "i'm going to", "i will"],
+                followUp: {
+                    success: ["That sounds great!", "Have fun!", "Enjoy your weekend!"],
+                    fail: ["Say 'Yes, I plan to...' or 'I want to...'"]
+                },
+                tips: ["Say 'I plan to [verb]' or 'I want to [verb]'"]
+            },
+            {
+                id: "q7",
+                question: "Do you prefer Saturdays or Sundays?",
+                translation: "Voce prefere sabados ou domingos?",
+                expectedAnswers: ["saturday", "sunday", "i prefer", "i like", "both"],
+                followUp: {
+                    success: ["Both are great days!", "Good choice!", "I agree!"],
+                    fail: ["Say 'I prefer...' or 'I like...'"]
+                },
+                tips: ["Say 'I prefer [day]' or 'I like both'"]
+            }
+        ],
+        encouragements: [
+            {text: "Your weekend English is great!", translation: "Seu ingles de fim de semana e otimo!"},
+            {text: "Sounds like fun!", translation: "Parece divertido!"},
+            {text: "You're describing your life perfectly!", translation: "Voce esta descrevendo sua vida perfeitamente!"},
+            {text: "Great vocabulary for weekends!", translation: "Excelente vocabulario para fins de semana!"},
+            {text: "Keep practicing!", translation: "Continue praticando!"},
+            {text: "Excellent weekend descriptions!", translation: "Excelentes descricoes de fim de semana!"}
+        ]
+    },
+
+    11: {
+        title: "Viagem",
+        description: "Planeje e fale sobre viagens",
+        icon: "✈️",
+        questions: [
+            {
+                id: "q1",
+                question: "Do you like to travel?",
+                translation: "Voce gosta de viajar?",
+                expectedAnswers: ["yes", "yes i do", "i love", "i like", "yes i love", "yes i like"],
+                followUp: {
+                    success: ["Traveling is the best!", "I love traveling too!", "Adventure awaits!"],
+                    fail: ["Say 'Yes, I love traveling' or 'Yes, I like to travel'"]
+                },
+                tips: ["Say 'Yes, I love/like traveling'"]
+            },
+            {
+                id: "q2",
+                question: "Where do you want to travel?",
+                translation: "Onde voce quer viajar?",
+                expectedAnswers: ["i want to go", "i want to visit", "to", "i want to travel to"],
+                followUp: {
+                    success: ["Great destination!", "You'll love it!", "That's beautiful!"],
+                    fail: ["Say 'I want to go to [place]'"]
+                },
+                tips: ["Say 'I want to go to [country/city]'"]
+            },
+            {
+                id: "q3",
+                question: "How do you like to travel? By plane, train, or car?",
+                translation: "Como voce gosta de viajar? De aviao, trem ou carro?",
+                expectedAnswers: ["by plane", "by train", "by car", "by bus", "i like to go by"],
+                followUp: {
+                    success: ["That's convenient!", "Fast and easy!", "Comfortable choice!"],
+                    fail: ["Say 'I like to travel by [transport]'"]
+                },
+                tips: ["Say 'I like to travel by plane/train/car'"]
+            },
+            {
+                id: "q4",
+                question: "What do you usually do when you travel?",
+                translation: "O que voce geralmente faz quando viaja?",
+                expectedAnswers: ["i visit", "i see", "i go to", "i take", "i take photos"],
+                followUp: {
+                    success: ["That's fun!", "Great activities!", "Traveling is amazing!"],
+                    fail: ["Say 'I usually [activity]'"]
+                },
+                tips: ["Say 'I usually visit museums' or 'I like to try local food'"]
+            },
+            {
+                id: "q5",
+                question: "What was the last place you visited?",
+                translation: "Qual foi o ultimo lugar que voce visitou?",
+                expectedAnswers: ["i went to", "i visited", "i went to [place]"],
+                followUp: {
+                    success: ["That sounds amazing!", "I want to go there!", "Great trip!"],
+                    fail: ["Say 'I went to [place]' or 'I visited [place]'"]
+                },
+                tips: ["Use past tense: 'I went to [place]'"]
+            },
+            {
+                id: "q6",
+                question: "Do you prefer to travel alone or with family?",
+                translation: "Voce prefere viajar sozinho ou com a familia?",
+                expectedAnswers: ["alone", "with family", "with friends", "both", "i prefer"],
+                followUp: {
+                    success: ["Both are great!", "I understand!", "Good choice!"],
+                    fail: ["Say 'I prefer to travel alone' or 'I prefer with family'"]
+                },
+                tips: ["Say 'I prefer [alone/with family]'"]
+            },
+            {
+                id: "q7",
+                question: "What is the most beautiful place you have seen?",
+                translation: "Qual e o lugar mais lindo que voce ja viu?",
+                expectedAnswers: ["i have seen", "i visited", "the most beautiful", "was", "is"],
+                followUp: {
+                    success: ["That sounds beautiful!", "I want to see it!", "Amazing!"],
+                    fail: ["Say 'I have seen [place]' or 'The most beautiful was...'"]
+                },
+                tips: ["Say 'The most beautiful place was [place]'"]
+            }
+        ],
+        encouragements: [
+            {text: "You're a world traveler!", translation: "Voce e um viajante mundial!"},
+            {text: "Your travel English is excellent!", translation: "Seu ingles de viagem e excelente!"},
+            {text: "I want to travel with you!", translation: "Eu quero viajar com voce!"},
+            {text: "Great travel vocabulary!", translation: "Excelente vocabulario de viagem!"},
+            {text: "Keep exploring the world!", translation: "Continue explorando o mundo!"},
+            {text: "Excellent travel descriptions!", translation: "Excelentes descricoes de viagem!"}
+        ]
+    },
+
+    12: {
+        title: "Saude",
+        description: "Fale sobre saude, medicos e habitos saudaveis",
+        icon: "🏥",
+        questions: [
+            {
+                id: "q1",
+                question: "How are you feeling today?",
+                translation: "Como voce esta se sentindo hoje?",
+                expectedAnswers: ["i am fine", "i'm fine", "i am good", "i'm good", "i feel", "not so good"],
+                followUp: {
+                    success: ["That's great!", "I'm glad you're well!", "Take care!"],
+                    fail: ["Say 'I am fine' or 'I feel [adjective]'"]
+                },
+                tips: ["Say 'I am fine/good' or 'I feel [tired/sick]'"]
+            },
+            {
+                id: "q2",
+                question: "Do you exercise regularly?",
+                translation: "Voce se exercita regularmente?",
+                expectedAnswers: ["yes", "yes i do", "i exercise", "i go to the gym", "sometimes", "no"],
+                followUp: {
+                    success: ["Exercise is important!", "Stay healthy!", "Great habit!"],
+                    fail: ["Say 'Yes, I exercise' or 'Sometimes' or 'No'"]
+                },
+                tips: ["Say 'Yes, I exercise' or 'Sometimes' or 'No'"]
+            },
+            {
+                id: "q3",
+                question: "What do you do to stay healthy?",
+                translation: "O que voce faz para se manter saudavel?",
+                expectedAnswers: ["i eat", "i exercise", "i sleep", "i drink", "i run", "i walk"],
+                followUp: {
+                    success: ["That's healthy!", "Great habits!", "Keep it up!"],
+                    fail: ["Say 'I eat healthy food' or 'I exercise'"]
+                },
+                tips: ["Say 'I [eat/exercise/sleep well]'"]
+            },
+            {
+                id: "q4",
+                question: "Do you eat healthy food?",
+                translation: "Voce come comida saudavel?",
+                expectedAnswers: ["yes", "yes i do", "i eat", "i try to", "sometimes"],
+                followUp: {
+                    success: ["Healthy eating is important!", "Great choice!", "Good for you!"],
+                    fail: ["Say 'Yes, I eat healthy food' or 'I try to'"]
+                },
+                tips: ["Say 'Yes, I eat healthy food' or 'I try to'"]
+            },
+            {
+                id: "q5",
+                question: "Do you sleep well at night?",
+                translation: "Voce dorme bem a noite?",
+                expectedAnswers: ["yes", "yes i do", "i sleep", "i sleep well", "not really", "no"],
+                followUp: {
+                    success: ["Sleep is very important!", "Good rest!", "That's healthy!"],
+                    fail: ["Say 'Yes, I sleep well' or 'Not really'"]
+                },
+                tips: ["Say 'Yes, I sleep well' or 'Not really'"]
+            },
+            {
+                id: "q6",
+                question: "How often do you go to the doctor?",
+                translation: "Com que frequencia voce vai ao medico?",
+                expectedAnswers: ["once a year", "twice a year", "sometimes", "when i", "every", "never"],
+                followUp: {
+                    success: ["That's responsible!", "Good for your health!", "Check-ups are important!"],
+                    fail: ["Say 'Once a year' or 'When I feel sick'"]
+                },
+                tips: ["Say 'Once/Twice a year' or 'When I feel sick'"]
+            },
+            {
+                id: "q7",
+                question: "What do you do when you feel sick?",
+                translation: "O que voce faz quando se sente doente?",
+                expectedAnswers: ["i go to", i take", "i rest", "i drink", "i call", "i stay home"],
+                followUp: {
+                    success: ["That's smart!", "Take care of yourself!", "Good idea!"],
+                    fail: ["Say 'I go to the doctor' or 'I rest'"]
+                },
+                tips: ["Say 'I go to the doctor' or 'I rest and drink water'"]
+            }
+        ],
+        encouragements: [
+            {text: "You're a healthy speaker!", translation: "Voce e um falante saudavel!"},
+            {text: "Your health English is great!", translation: "Seu ingles de saude e otimo!"},
+            {text: "Take care of your health!", translation: "Cuide da sua saude!"},
+            {text: "Great health vocabulary!", translation: "Excelente vocabulario de saude!"},
+            {text: "Keep being healthy!", translation: "Continue sendo saudavel!"},
+            {text: "Excellent health descriptions!", translation: "Excelentes descricoes de saude!"}
         ]
     }
 };
