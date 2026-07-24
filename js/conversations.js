@@ -8,56 +8,61 @@ const conversationScenarios = {
                 id: "q1",
                 question: "What is your name?",
                 translation: "Qual é o seu nome?",
-                expectedAnswers: ["my name is", "i am", "i'm"],
+                expectedAnswers: ["my name is", "i am", "i'm", "name is", "call me"],
+                exampleAnswers: ["My name is Maria.", "I'm João.", "I am Pedro.", "Call me Ana."],
                 followUp: {
-                    success: ["Nice to meet you!", "Great name!", "That's a nice name!"],
-                    fail: ["Tente novamente! Diga: My name is... ou I'm..."]
+                    success: ["Nice to meet you, {name}!", "Great name! I like it!", "That's a beautiful name!"],
+                    fail: ["Tente: My name is... (Meu nome é...)", "Ou: I'm... (Eu sou...)"]
                 },
-                tips: ["Diga 'My name is...' seguido do seu nome", "Ou 'I am...' ou 'I'm...'"]
+                tips: ["Diga 'My name is...' + seu nome", "Ou 'I'm...' + seu nome", "Exemplo: My name is Maria"]
             },
             {
                 id: "q2",
                 question: "Where are you from?",
                 translation: "De onde você é?",
-                expectedAnswers: ["i am from", "i'm from", "i come from"],
+                expectedAnswers: ["i am from", "i'm from", "i come from", "from brazil", "from sao paulo"],
+                exampleAnswers: ["I'm from Brazil.", "I am from São Paulo.", "I come from Rio de Janeiro."],
                 followUp: {
-                    success: ["That's a nice place!", "That's interesting!", "That's great!"],
-                    fail: ["Tente: I am from... ou I'm from..."]
+                    success: ["Brazil is a beautiful country!", "I love Brazil!", "That's a great place!"],
+                    fail: ["Tente: I am from... (Eu sou de...)", "Ou: I'm from... + cidade/país"]
                 },
-                tips: ["Use 'I am from...' ou 'I'm from...'"]
+                tips: ["Use 'I am from...' + cidade ou país", "Exemplo: I'm from Brazil"]
             },
             {
                 id: "q3",
                 question: "How old are you?",
                 translation: "Quantos anos você tem?",
-                expectedAnswers: ["i am", "i'm", "years old"],
+                expectedAnswers: ["i am", "i'm", "years old", "i have", "i'm years"],
+                exampleAnswers: ["I'm 25 years old.", "I am 30.", "I have 20 years."],
                 followUp: {
-                    success: ["Great!", "That's nice!", "That's good!"],
-                    fail: ["Diga: I am... years old"]
+                    success: ["That's a great age!", "You're young!", "That's wonderful!"],
+                    fail: ["Diga: I am... years old", "Ou: I'm... (idade)"]
                 },
-                tips: ["Diga 'I am...' seguido da idade + 'years old'"]
+                tips: ["Diga 'I am...' + idade + 'years old'", "Exemplo: I'm 25 years old"]
             },
             {
                 id: "q4",
                 question: "How many brothers or sisters do you have?",
                 translation: "Quantos irmãos ou irmãs você tem?",
-                expectedAnswers: ["i have", "i don't have", "i have one", "i have two", "no brothers", "no sisters", "just me"],
+                expectedAnswers: ["i have", "i don't have", "i have one", "i have two", "no brothers", "no sisters", "just me", "i have three", "i don't"],
+                exampleAnswers: ["I have two brothers.", "I have one sister.", "I don't have any brothers.", "Just me."],
                 followUp: {
-                    success: ["That's great!", "Nice! Me too!"],
-                    fail: ["Diga: I have... (Eu tenho...) ou I don't have... (Eu não tenho...)"]
+                    success: ["Family is important!", "That's great!", "Nice family!"],
+                    fail: ["Diga: I have... + número + brothers/sisters", "Ou: I don't have..."]
                 },
-                tips: ["Use 'I have...' + número + 'brothers/sisters' ou 'I don't have...'"]
+                tips: ["Use 'I have...' + número + 'brothers/sisters'", "Ou 'I don't have...' se não tem", "Exemplo: I have one sister"]
             },
             {
                 id: "q5",
                 question: "How are you today?",
                 translation: "Como você está hoje?",
-                expectedAnswers: ["i am good", "i'm good", "i am fine", "i'm fine", "i am happy", "i'm great", "not so good"],
+                expectedAnswers: ["i am good", "i'm good", "i am fine", "i'm fine", "i am happy", "i'm great", "not so good", "i'm well", "pretty good"],
+                exampleAnswers: ["I'm good, thank you!", "I'm fine.", "I'm great today!", "Not so good."],
                 followUp: {
-                    success: ["That's great!", "Good to hear!"],
-                    fail: ["Diga: I'm good (Estou bem) ou I'm fine (Estou bem)"]
+                    success: ["That's great to hear!", "I'm glad you're well!", "Good!"],
+                    fail: ["Diga: I'm good (Estou bem)", "Ou: I'm fine (Estou bem)"]
                 },
-                tips: ["Use 'I'm good' (Estou bem), 'I'm fine' (Estou bem) ou 'I'm happy' (Estou feliz)"]
+                tips: ["Use 'I'm good' (Estou bem)", "Ou 'I'm fine' (Estou bem)", "Ou 'I'm happy' (Estou feliz)"]
             }
         ],
         greetings: [
@@ -78,7 +83,9 @@ const conversationScenarios = {
             {text: "Let me think of a question...", translation: "Deixa eu pensar em uma pergunta..."},
             {text: "Hmm, what should I ask you next?", translation: "Hmm, o que devo perguntar agora?"},
             {text: "I have a question for you...", translation: "Tenho uma pergunta para você..."},
-            {text: "Let's try something different...", translation: "Vamos tentar algo diferente..."}
+            {text: "Let's try something different...", translation: "Vamos tentar algo diferente..."},
+            {text: "Interesting! Tell me more...", translation: "Interessante! Conte-me mais..."},
+            {text: "Now, let's continue...", translation: "Agora, vamos continuar..."}
         ]
     },
     
@@ -93,89 +100,97 @@ const conversationScenarios = {
                 id: "r1",
                 question: "Good evening! Welcome to our restaurant. Do you have a reservation?",
                 translation: "Boa noite! Bem-vindo ao nosso restaurante. Você tem uma reserva?",
-                expectedAnswers: ["yes", "no", "i have", "i don't"],
+                expectedAnswers: ["yes", "no", "i have", "i don't", "yes i do", "no i don't", "i don't have"],
+                exampleAnswers: ["Yes, I have a reservation.", "No, I don't.", "No, I don't have one."],
                 followUp: {
                     success: ["Great! Please, come with me.", "Perfect! Your table is ready."],
-                    fail: ["Just say 'Yes' (Sim) or 'No' (Não)"]
+                    fail: ["Diga: Yes (Sim) ou No (Não)", "Ou: Yes, I have... (Sim, eu tenho...)"]
                 },
-                tips: ["Answer 'Yes' (Sim) or 'No' (Não)"]
+                tips: ["Diga 'Yes' (Sim) ou 'No' (Não)", "Exemplo: Yes, I have a reservation"]
             },
             {
                 id: "r2",
                 question: "Here is the menu. What would you like to drink?",
                 translation: "Aqui está o cardápio. O que você gostaria de beber?",
-                expectedAnswers: ["water", "coffee", "tea", "juice", "soda", "i would like", "can i have", "some"],
+                expectedAnswers: ["water", "coffee", "tea", "juice", "soda", "i would like", "can i have", "some", "please", "i'll have", "just water"],
+                exampleAnswers: ["I would like some water, please.", "Can I have a coffee?", "Just water, please.", "I'll have a tea."],
                 followUp: {
-                    success: ["Great choice!", "Good! Anything else?", "I'll bring it now!"],
-                    fail: ["Say: I would like... (Eu gostaria de...) or Can I have... (Posso ter...)"]
+                    success: ["Great choice! Anything else?", "Good! I'll bring it now!", "Perfect! What else?"],
+                    fail: ["Diga: I would like... (Eu gostaria de...)", "Ou: Can I have... (Posso ter...)"]
                 },
-                tips: ["Use 'I would like...' or 'Can I have...' + drink name"]
+                tips: ["Use 'I would like...' + bebida", "Ou 'Can I have...' + bebida", "Exemplo: I would like some water"]
             },
             {
                 id: "r3",
                 question: "Are you ready to order food?",
                 translation: "Estão prontos para pedir a comida?",
-                expectedAnswers: ["yes", "i am", "not yet", "i need more time", "what do you recommend"],
+                expectedAnswers: ["yes", "i am", "not yet", "i need more time", "what do you recommend", "almost", "yes we are", "i'm ready"],
+                exampleAnswers: ["Yes, I'm ready.", "Not yet, I need more time.", "What do you recommend?"],
                 followUp: {
-                    success: ["Great! What would you like?", "Sure! Take your time."],
-                    fail: ["Say 'Yes' (Sim) or 'Not yet' (Ainda não)"]
+                    success: ["Great! What would you like?", "Sure! Take your time.", "Our best dish is the pasta."],
+                    fail: ["Diga: Yes (Sim) ou Not yet (Ainda não)", "Ou: What do you recommend? (O que você recomenda?)"]
                 },
-                tips: ["Say 'Yes' or 'Not yet'"]
+                tips: ["Diga 'Yes' ou 'Not yet'", "Ou pergunte: What do you recommend?"]
             },
             {
                 id: "r4",
                 question: "What would you like to eat?",
                 translation: "O que você gostaria de comer?",
-                expectedAnswers: ["pasta", "pizza", "salad", "chicken", "fish", "steak", "soup", "i would like", "can i have", "some"],
+                expectedAnswers: ["pasta", "pizza", "salad", "chicken", "fish", "steak", "soup", "i would like", "can i have", "some", "i'll have", "the pasta", "the pizza"],
+                exampleAnswers: ["I would like the pasta.", "Can I have a pizza?", "I'll have the chicken.", "The salad, please."],
                 followUp: {
-                    success: ["Great choice! Anything else?", "That's our best dish!", "Good!"],
-                    fail: ["Say: I would like the pasta/pizza/salad (Eu gostaria da massa/pizza/salada)"]
+                    success: ["Great choice! Anything else?", "That's our best dish!", "Good! Anything else?"],
+                    fail: ["Diga: I would like the... (Eu gostaria da/do...)", "Escolha: pasta, pizza, salad, chicken, fish"]
                 },
-                tips: ["Choose: pasta (massa), pizza, salad (salada), chicken (frango), fish (peixe)"]
+                tips: ["Use 'I would like the...' + comida", "Escolha: pasta (massa), pizza, salad (salada), chicken (frango)"]
             },
             {
                 id: "r5",
                 question: "How is everything? Is the food good?",
                 translation: "Como está tudo? A comida está boa?",
-                expectedAnswers: ["yes", "it is", "great", "delicious", "good", "wonderful", "amazing"],
+                expectedAnswers: ["yes", "it is", "great", "delicious", "good", "wonderful", "amazing", "it's good", "very good", "excellent"],
+                exampleAnswers: ["Yes, it's delicious!", "The food is great!", "It's wonderful!", "Very good!"],
                 followUp: {
                     success: ["I'm happy you like it!", "That makes me happy!", "Enjoy your meal!"],
-                    fail: ["Say 'It's great!' (Está ótimo!) or 'Yes, delicious!' (Sim, delicioso!)"]
+                    fail: ["Diga: It's great! (Está ótimo!)", "Ou: Yes, delicious! (Sim, delicioso!)"]
                 },
-                tips: ["Say 'It's great!' or 'Yes, delicious!'"]
+                tips: ["Diga 'It's great!' ou 'Yes, delicious!'", "Outras opções: wonderful, amazing, very good"]
             },
             {
                 id: "r6",
                 question: "Would you like dessert?",
                 translation: "Gostariam de sobremesa?",
-                expectedAnswers: ["yes", "no", "i would like", "i'll have", "no thank you", "maybe"],
+                expectedAnswers: ["yes", "no", "i would like", "i'll have", "no thank you", "maybe", "what do you have", "yes please", "no thanks"],
+                exampleAnswers: ["Yes, please.", "No, thank you.", "What do you have?", "I'll have a cake."],
                 followUp: {
                     success: ["I'll bring it now!", "Great choice! You'll love it!", "No problem!"],
-                    fail: ["Say 'Yes, please' (Sim, por favor) or 'No, thank you' (Não, obrigado)"]
+                    fail: ["Diga: Yes, please (Sim, por favor)", "Ou: No, thank you (Não, obrigado)"]
                 },
-                tips: ["Say 'Yes, please' or 'No, thank you'"]
+                tips: ["Diga 'Yes, please' ou 'No, thank you'", "Ou pergunte: What do you have?"]
             },
             {
                 id: "r7",
                 question: "Can I get you anything else?",
                 translation: "Posso trazer mais alguma coisa?",
-                expectedAnswers: ["no", "that's all", "just the check", "the bill please", "nothing else"],
+                expectedAnswers: ["no", "that's all", "just the check", "the bill please", "nothing else", "no that's all", "just the bill", "we're done"],
+                exampleAnswers: ["No, that's all.", "Just the check, please.", "That's all, thank you."],
                 followUp: {
-                    success: ["I'll bring the check now.", "Perfect! I'll be right back."],
-                    fail: ["Say 'No, that's all' (Não, é tudo) or 'Just the check, please' (Só a conta, por favor)"]
+                    success: ["I'll bring the check now.", "Perfect! I'll be right back.", "Thank you!"],
+                    fail: ["Diga: No, that's all (Não, é tudo)", "Ou: Just the check, please (Só a conta, por favor)"]
                 },
-                tips: ["Say 'No, that's all' or 'Just the check, please'"]
+                tips: ["Diga 'No, that's all' ou 'Just the check, please'", "Outras opções: That's all, thank you"]
             },
             {
                 id: "r8",
                 question: "Here is your check. The total is forty-five dollars. How would you like to pay?",
                 translation: "Aqui está a conta. O total é quarenta e cinco dólares. Como você gostaria de pagar?",
-                expectedAnswers: ["cash", "credit card", "debit", "card", "with card", "with cash"],
+                expectedAnswers: ["cash", "credit card", "debit", "card", "with card", "with cash", "i'll pay with", "by card", "by cash"],
+                exampleAnswers: ["I'll pay with card.", "Cash, please.", "Credit card.", "By card."],
                 followUp: {
-                    success: ["Thank you! Have a wonderful evening!", "Perfect! Here is your receipt."],
-                    fail: ["Say 'Cash' (Dinheiro) or 'Credit card' (Cartão de crédito)"]
+                    success: ["Thank you! Have a wonderful evening!", "Perfect! Here is your receipt.", "Thank you! Come back soon!"],
+                    fail: ["Diga: Cash (Dinheiro) ou Credit card (Cartão)", "Ou: I'll pay with card (Vou pagar com cartão)"]
                 },
-                tips: ["Say 'Cash' (dinheiro) or 'Credit card' (cartão)"]
+                tips: ["Diga 'Cash' (dinheiro) ou 'Credit card' (cartão)", "Ou: I'll pay with card"]
             }
         ],
         encouragements: [

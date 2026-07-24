@@ -804,10 +804,12 @@ class EnglishTeacherApp {
         
         setTimeout(() => {
             // Show question with translation
-            this.addChatMessage('teacher', 
-                `${question.question}\n\n🇧🇷 ${question.translation}`, 
-                ''
-            );
+            let questionMessage = `💬 ${question.question}\n\n🇧🇷 ${question.translation}`;
+            if (question.exampleAnswers && question.exampleAnswers.length > 0) {
+                questionMessage += `\n\n📝 Exemplo: "${question.exampleAnswers[0]}"`;
+            }
+            
+            this.addChatMessage('teacher', questionMessage, '');
             
             // Speak the question
             this.speech.speak(question.question);
@@ -816,11 +818,25 @@ class EnglishTeacherApp {
             this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
             
             // Show tips with translation
-            this.chatHint.innerHTML = `
-                <p>💡 <strong>Como responder:</strong> ${question.tips[0]}</p>
-                <p>📝 <strong>Respostas aceitas:</strong> <em>${question.expectedAnswers.slice(0, 3).join(', ')}...</em></p>
-                <p>🎤 <strong>Dica:</strong> Clique no microfone e fale em inglês, ou digite na caixa de texto</p>
-            `;
+            let tipsHtml = `<p>💡 <strong>Como responder:</strong></p><ul>`;
+            if (question.tips) {
+                question.tips.forEach(tip => {
+                    tipsHtml += `<li>${tip}</li>`;
+                });
+            }
+            tipsHtml += `</ul>`;
+            
+            if (question.exampleAnswers && question.exampleAnswers.length > 0) {
+                tipsHtml += `<p>📝 <strong>Exemplos de resposta:</strong></p><ul>`;
+                question.exampleAnswers.slice(0, 3).forEach(ex => {
+                    tipsHtml += `<li><em>"${ex}"</em></li>`;
+                });
+                tipsHtml += `</ul>`;
+            }
+            
+            tipsHtml += `<p>🎤 <strong>Dica:</strong> Clique no microfone e fale em inglês, ou digite na caixa de texto</p>`;
+            
+            this.chatHint.innerHTML = tipsHtml;
         }, 1500);
     }
     
@@ -840,10 +856,14 @@ class EnglishTeacherApp {
             this.chatCorrect++;
             const encouragement = getRandomEncouragement(this.currentScenario);
             
-            this.addChatMessage('teacher', 
-                `✅ ${result.feedback}\n\n🇧🇷 Resposta correta!`, 
-                ''
-            );
+            // Feedback positivo mais detalhado
+            let feedbackMessage = `✅ ${result.feedback}`;
+            if (question.exampleAnswers && question.exampleAnswers.length > 0) {
+                feedbackMessage += `\n\n📝 Exemplo de resposta: "${question.exampleAnswers[0]}"`;
+            }
+            feedbackMessage += `\n\n🇧🇷 Resposta correta!`;
+            
+            this.addChatMessage('teacher', feedbackMessage, '');
             
             setTimeout(() => {
                 this.addChatMessage('teacher', 
@@ -853,10 +873,17 @@ class EnglishTeacherApp {
                 this.speech.speak(encouragement.text);
             }, 1500);
         } else {
-            this.addChatMessage('teacher', 
-                `❌ ${result.feedback}\n\n💡 Tente: "${question.expectedAnswers[0]}" ou similar`, 
-                ''
-            );
+            // Feedback negativo mais detalhado
+            let feedbackMessage = `❌ ${result.feedback}`;
+            if (question.exampleAnswers && question.exampleAnswers.length > 0) {
+                feedbackMessage += `\n\n📝 Tente responder assim:`;
+                question.exampleAnswers.slice(0, 2).forEach((ex, i) => {
+                    feedbackMessage += `\n• "${ex}"`;
+                });
+            }
+            feedbackMessage += `\n\n💡 Respostas aceitas: ${question.expectedAnswers.slice(0, 3).join(', ')}...`;
+            
+            this.addChatMessage('teacher', feedbackMessage, '');
             this.speech.speak(result.feedback);
         }
         
