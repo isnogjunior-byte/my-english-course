@@ -258,11 +258,25 @@ class SpeechManager {
         expectedWords.forEach(word => {
             if (spokenWords.includes(word)) {
                 matches++;
+            } else {
+                for (const spoken of spokenWords) {
+                    if (spoken.length > 2 && word.length > 2) {
+                        if (spoken.startsWith(word.substring(0, 3)) || word.startsWith(spoken.substring(0, 3))) {
+                            matches += 0.7;
+                            break;
+                        }
+                    }
+                }
             }
         });
         
-        const accuracy = (matches / totalWords) * 100;
-        return Math.round(accuracy);
+        let accuracy = Math.round((matches / totalWords) * 100);
+        if (spokenWords.length > 0) {
+            const coverage = Math.min(spokenWords.length / totalWords, 1.5);
+            accuracy = Math.round(accuracy * Math.min(coverage, 1.2));
+        }
+        
+        return Math.min(accuracy, 100);
     }
     
     highlightWords(expected, spoken) {

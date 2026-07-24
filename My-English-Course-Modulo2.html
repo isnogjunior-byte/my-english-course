@@ -5460,11 +5460,25 @@ class SpeechManager {
         expectedWords.forEach(word => {
             if (spokenWords.includes(word)) {
                 matches++;
+            } else {
+                for (const spoken of spokenWords) {
+                    if (spoken.length > 2 && word.length > 2) {
+                        if (spoken.startsWith(word.substring(0, 3)) || word.startsWith(spoken.substring(0, 3))) {
+                            matches += 0.7;
+                            break;
+                        }
+                    }
+                }
             }
         });
         
-        const accuracy = (matches / totalWords) * 100;
-        return Math.round(accuracy);
+        let accuracy = Math.round((matches / totalWords) * 100);
+        if (spokenWords.length > 0) {
+            const coverage = Math.min(spokenWords.length / totalWords, 1.5);
+            accuracy = Math.round(accuracy * Math.min(coverage, 1.2));
+        }
+        
+        return Math.min(accuracy, 100);
     }
     
     highlightWords(expected, spoken) {
@@ -6141,31 +6155,31 @@ class EnglishTeacherApp {
         
         this.showMessage('Você', transcript);
         
-        if (accuracy >= 80) {
+        if (accuracy >= 60) {
             this.totalCorrect++;
             this.teacherStatus.textContent = 'Muito bem!';
-            this.showMessage('Professor', 'Excelente! Sua pronúncia está muito boa!');
+            this.showMessage('Professor', `Excelente! Você disse: "${transcript}" (${accuracy}%)`);
             
             setTimeout(() => {
-                this.speech.speak('Excellent! Your pronunciation is very good!', () => {
+                this.speech.speak('Great job! Your pronunciation is good!', () => {
                     this.teacherStatus.textContent = 'Clique em "Próxima" para continuar';
                 });
             }, 1000);
-        } else if (accuracy >= 50) {
+        } else if (accuracy >= 30) {
             this.teacherStatus.textContent = 'Quase lá!';
-            this.showMessage('Professor', 'Bom esforço! Tente falar mais claro.');
+            this.showMessage('Professor', `Bom esforço! Ouvi: "${transcript}". Tente falar mais devagar.`);
             
             setTimeout(() => {
-                this.speech.speak('Good try! Speak more clearly, please.', () => {
+                this.speech.speak('Good try! Speak more slowly, please.', () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" ou "Próxima"';
                 });
             }, 1000);
         } else {
             this.teacherStatus.textContent = 'Tente novamente';
-            this.showMessage('Professor', 'Não desista! Ouça a frase e tente novamente.');
+            this.showMessage('Professor', `Não ouvi direito. Ouça a frase e repita.`);
             
             setTimeout(() => {
-                this.speech.speak("Don't give up! Listen and try again.", () => {
+                this.speech.speak("Listen and try again.", () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" para ouvir novamente';
                 });
             }, 1000);
@@ -6389,7 +6403,7 @@ class EnglishTeacherApp {
             
             setTimeout(() => {
                 this.addChatMessage('teacher', 
-                    `Interessante! Mas acho que você está respondendo antes da pergunta. Aguarde eu fazer a pergunta e depois responda. 😊\n\n🇧🇷 Aguarde a pergunta abaixo e digite sua resposta!`, 
+                    `Aguarde a pergunta da Professora Sarah! 😊\n\n👇 Veja a pergunta abaixo e responda.`, 
                     ''
                 );
             }, 500);

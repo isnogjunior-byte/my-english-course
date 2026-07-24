@@ -14,6 +14,7 @@ class EnglishTeacherApp {
         this.chatTotal = 0;
         this.isChatActive = false;
         this.isWaitingForAnswer = false;
+        this.isChatTabActive = false;
         
         this.initElements();
         this.initEventListeners();
@@ -95,9 +96,9 @@ class EnglishTeacherApp {
         
         // Speech callbacks
         this.speech.onResult = (transcript, confidence) => {
-            if (this.isWaitingForAnswer) {
+            if (this.isWaitingForAnswer && this.isChatTabActive) {
                 this.handleChatAnswer(transcript, confidence);
-            } else {
+            } else if (this.isLessonActive) {
                 this.handleSpeechResult(transcript, confidence);
             }
         };
@@ -145,7 +146,8 @@ class EnglishTeacherApp {
     }
     
     switchTab(tabName) {
-        // Atualizar botões
+        this.isChatTabActive = (tabName === 'chat');
+        
         this.tabBtns.forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.tab === tabName) {
@@ -153,7 +155,6 @@ class EnglishTeacherApp {
             }
         });
         
-        // Atualizar conteúdo
         this.tabContents.forEach(content => {
             content.classList.remove('active');
             if (content.id === `tab-${tabName}`) {
@@ -633,31 +634,31 @@ class EnglishTeacherApp {
         
         this.showMessage('Você', transcript);
         
-        if (accuracy >= 80) {
+        if (accuracy >= 60) {
             this.totalCorrect++;
             this.teacherStatus.textContent = 'Muito bem!';
-            this.showMessage('Professor', 'Excelente! Sua pronúncia está muito boa!');
+            this.showMessage('Professor', `Excelente! Você disse: "${transcript}" (${accuracy}%)`);
             
             setTimeout(() => {
-                this.speech.speak('Excellent! Your pronunciation is very good!', () => {
+                this.speech.speak('Great job! Your pronunciation is good!', () => {
                     this.teacherStatus.textContent = 'Clique em "Próxima" para continuar';
                 });
             }, 1000);
-        } else if (accuracy >= 50) {
+        } else if (accuracy >= 30) {
             this.teacherStatus.textContent = 'Quase lá!';
-            this.showMessage('Professor', 'Bom esforço! Tente falar mais claro.');
+            this.showMessage('Professor', `Bom esforço! Ouvi: "${transcript}". Tente falar mais devagar.`);
             
             setTimeout(() => {
-                this.speech.speak('Good try! Speak more clearly, please.', () => {
+                this.speech.speak('Good try! Speak more slowly, please.', () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" ou "Próxima"';
                 });
             }, 1000);
         } else {
             this.teacherStatus.textContent = 'Tente novamente';
-            this.showMessage('Professor', 'Não desista! Ouça a frase e tente novamente.');
+            this.showMessage('Professor', `Não ouvi direito. Ouça a frase e repita.`);
             
             setTimeout(() => {
-                this.speech.speak("Don't give up! Listen and try again.", () => {
+                this.speech.speak("Listen and try again.", () => {
                     this.teacherStatus.textContent = 'Clique em "Repetir" para ouvir novamente';
                 });
             }, 1000);
@@ -770,7 +771,6 @@ class EnglishTeacherApp {
         this.chatTotal = 0;
         this.updateChatScore();
         
-        // Add context message with translation
         if (scenario.context) {
             this.addChatMessage('teacher', 
                 `${scenario.context}\n\n🇧🇷 ${scenario.contextTranslation || ''}`, 
@@ -778,10 +778,9 @@ class EnglishTeacherApp {
             );
         }
         
-        // Start conversation
         setTimeout(() => {
             this.askNextQuestion();
-        }, 2000);
+        }, 1500);
     }
     
     askNextQuestion() {
@@ -793,7 +792,9 @@ class EnglishTeacherApp {
             return;
         }
         
-        // Add thinking message occasionally
+        this.isWaitingForAnswer = true;
+        this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
+        
         if (this.currentQuestionIndex > 0 && Math.random() > 0.7) {
             const thinking = getRandomThinking();
             this.addChatMessage('teacher', 
@@ -802,38 +803,30 @@ class EnglishTeacherApp {
             );
         }
         
-        setTimeout(() => {
-            // Show question with translation
-            let questionMessage = `💬 ${question.question}\n\n🇧🇷 ${question.translation}`;
-            
-            this.addChatMessage('teacher', questionMessage, '');
-            
-            // Speak the question
-            this.speech.speak(question.question);
-            
-            this.isWaitingForAnswer = true;
-            this.chatTeacherStatus.textContent = 'Aguardando sua resposta...';
-            
-            // Build prominent tips
-            let tipsHtml = '';
-            
-            if (question.exampleAnswers && question.exampleAnswers.length > 0) {
-                tipsHtml += `<p>📝 <strong>DIGITE UMA DESSAS OPÇÕES:</strong></p>`;
-                tipsHtml += `<div style="background:#ebf8ff; border-radius:8px; padding:10px; margin:8px 0;">`;
-                question.exampleAnswers.forEach(ex => {
-                    tipsHtml += `<div style="padding:4px 0; border-bottom:1px solid #bee3f8;"><em>"${ex}"</em></div>`;
-                });
-                tipsHtml += `</div>`;
-            }
-            
-            tipsHtml += `<p>💡 <strong>Você também pode digitar:</strong></p><ul>`;
-            tipsHtml += `<li>Uma palavra em inglês (ex: <em>yes</em>, <em>no</em>, <em>hello</em>)</li>`;
-            tipsHtml += `<li>Uma frase em português (ex: <em>meu nome é Maria</em>)</li>`;
-            tipsHtml += `</ul>`;
-            tipsHtml += `<p style="color:#718096; font-size:12px;">🎤 O microfone também funciona — clique em "Falar" e fale em inglês!</p>`;
-            
-            this.chatHint.innerHTML = tipsHtml;
-        }, 1500);
+        let questionMessage = `💬 ${question.question}\n\n🇧🇷 ${question.translation}`;
+        
+        this.addChatMessage('teacher', questionMessage, '');
+        
+        this.speech.speak(question.question);
+        
+        let tipsHtml = '';
+        
+        if (question.exampleAnswers && question.exampleAnswers.length > 0) {
+            tipsHtml += `<p>📝 <strong>DIGITE UMA DESSAS OPÇÕES:</strong></p>`;
+            tipsHtml += `<div style="background:#ebf8ff; border-radius:8px; padding:10px; margin:8px 0;">`;
+            question.exampleAnswers.forEach(ex => {
+                tipsHtml += `<div style="padding:4px 0; border-bottom:1px solid #bee3f8;"><em>"${ex}"</em></div>`;
+            });
+            tipsHtml += `</div>`;
+        }
+        
+        tipsHtml += `<p>💡 <strong>Ou digite qualquer coisa:</strong></p><ul>`;
+        tipsHtml += `<li>Uma palavra em inglês (ex: <em>yes</em>, <em>no</em>)</li>`;
+        tipsHtml += `<li>Uma frase em português (ex: <em>meu nome é Maria</em>)</li>`;
+        tipsHtml += `</ul>`;
+        tipsHtml += `<p style="color:#718096; font-size:12px;">🎤 Microfone: clique em "Falar" e fale em inglês</p>`;
+        
+        this.chatHint.innerHTML = tipsHtml;
     }
     
     handleChatAnswer(transcript, confidence) {
@@ -844,10 +837,8 @@ class EnglishTeacherApp {
         
         this.chatTotal++;
         
-        // Add student message
         this.addChatMessage('student', transcript, `Você disse: "${transcript}"`);
         
-        // Add feedback with translation
         if (result.match) {
             this.chatCorrect++;
             const encouragement = getRandomEncouragement(this.currentScenario);
@@ -858,10 +849,9 @@ class EnglishTeacherApp {
             );
             this.speech.speak(encouragement.text);
         } else {
-            // Show correct answer and move on
             const correctAnswer = question.exampleAnswers ? question.exampleAnswers[0] : question.expectedAnswers[0];
             this.addChatMessage('teacher', 
-                `❌ Não entendi bem.\n\n📝 Resposta correta: "${correctAnswer}"\n\n🇧🇷 Tente na próxima pergunta!`, 
+                `❌ Não entendi.\n\n📝 Resposta correta: "${correctAnswer}"\n\n🇧🇷 Tente na próxima pergunta!`, 
                 ''
             );
             this.speech.speak("Let's try the next question!");
@@ -869,11 +859,12 @@ class EnglishTeacherApp {
         
         this.updateChatScore();
         
-        // Move to next question after delay
+        this.chatHint.innerHTML = `<p>⏳ Aguarde a próxima pergunta...</p>`;
+        
         setTimeout(() => {
             this.currentQuestionIndex++;
             this.askNextQuestion();
-        }, 3500);
+        }, 3000);
     }
     
     sendChatMessage() {
@@ -885,15 +876,14 @@ class EnglishTeacherApp {
         if (this.isWaitingForAnswer) {
             this.handleChatAnswer(text, 1.0);
         } else {
-            // Not waiting for an answer - treat as free text
             this.addChatMessage('student', text, `Você: ${text}`);
             
             setTimeout(() => {
                 this.addChatMessage('teacher', 
-                    `Interessante! Mas acho que você está respondendo antes da pergunta. Aguarde eu fazer a pergunta e depois responda. 😊\n\n🇧🇷 Aguarde a pergunta abaixo e digite sua resposta!`, 
+                    `Aguarde a pergunta da Professora Sarah! 😊\n\n👇 Veja a pergunta abaixo e responda.`,
                     ''
                 );
-            }, 500);
+            }, 300);
         }
     }
     
