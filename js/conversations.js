@@ -1201,9 +1201,12 @@ function checkAnswer(scenarioId, questionIndex, userAnswer) {
     const question = getQuestion(scenarioId, questionIndex);
     if (!question) return { match: false, score: 0 };
     
-    const userAnswerLower = userAnswer.toLowerCase().trim();
+    const userAnswerLower = userAnswer.toLowerCase().trim()
+        .replace(/[^\w\s\u00C0-\u017F]/g, '')
+        .replace(/\s+/g, ' ');
     let bestMatch = 0;
     
+    // 1. Check exact substring matches in expected answers
     for (const expected of question.expectedAnswers) {
         if (userAnswerLower.includes(expected.toLowerCase())) {
             bestMatch = 1;
@@ -1211,7 +1214,17 @@ function checkAnswer(scenarioId, questionIndex, userAnswer) {
         }
     }
     
-    // Check partial matches
+    // 2. Check if any expected answer is a substring of the user's answer
+    if (bestMatch === 0) {
+        for (const expected of question.expectedAnswers) {
+            if (expected.toLowerCase().includes(userAnswerLower) && userAnswerLower.length >= 2) {
+                bestMatch = 1;
+                break;
+            }
+        }
+    }
+    
+    // 3. Check word-level matches
     if (bestMatch === 0) {
         const words = userAnswerLower.split(' ');
         for (const expected of question.expectedAnswers) {
@@ -1226,6 +1239,11 @@ function checkAnswer(scenarioId, questionIndex, userAnswer) {
                 bestMatch = Math.max(bestMatch, matchCount / expectedWords.length * 0.7);
             }
         }
+    }
+    
+    // 4. Accept ANY non-empty answer with at least 2 characters (for beginners)
+    if (bestMatch === 0 && userAnswerLower.length >= 2) {
+        bestMatch = 0.5;
     }
     
     return {
